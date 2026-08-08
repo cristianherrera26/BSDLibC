@@ -1,0 +1,38 @@
+#	$NetBSD: files.xen.pv,v 1.3 2020/05/05 17:02:01 bouyer Exp $
+
+file	arch/xen/x86/autoconf.c		xenpv
+file	arch/xen/x86/x86_xpmap.c	xenpv
+file	arch/xen/x86/xen_pmap.c		xenpv
+file	arch/xen/x86/xenfunc.c		xenpv
+file	arch/xen/xen/xen_acpi_machdep.c	acpi & xenpv
+
+file	arch/xen/x86/consinit.c		machdep & xenpv
+file	arch/xen/x86/pintr.c		machdep & dom0ops & xenpv
+
+file	arch/xen/x86/xen_ipi.c			multiprocessor & xenpv
+
+include "arch/xen/conf/files.compat"
+
+#
+# System bus types
+#
+
+# PCI frontend
+device xpci: pcibus
+attach xpci at xenbus with xpci_xenbus
+file	arch/xen/xen/xpci_xenbus.c	xpci_xenbus
+
+# Xen Balloon driver
+device	balloon
+attach	balloon at xenbus
+file	arch/xen/xen/balloon.c		balloon
+
+device	pciback {unit = -1}
+attach	pciback at pci
+file	arch/xen/xen/pciback.c		pciback
+
+device vcpu
+attach vcpu at xendevbus
+file	arch/xen/x86/cpu.c		xenpv & vcpu
+
+defflag	opt_xen.h			XENPV

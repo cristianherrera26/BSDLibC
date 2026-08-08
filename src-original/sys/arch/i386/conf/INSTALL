@@ -1,0 +1,27 @@
+# $NetBSD: INSTALL,v 1.336 2022/07/29 10:08:01 riastradh Exp $
+#
+#	INSTALL - Installation kernel.
+#
+#	This kernel is derived from GENERIC with additional memory disk
+#	options.
+
+include	"arch/i386/conf/MONOLITHIC"
+
+#ident 		"INSTALL-$Revision: 1.336 $"
+
+no options	MEMORY_DISK_DYNAMIC
+options 	MEMORY_DISK_IS_ROOT	# force root on memory disk
+options 	MEMORY_DISK_SERVER=0	# no userspace memory disk support
+options 	MEMORY_DISK_ROOT_SIZE=10000	# size of memory disk, in blocks
+options 	MEMORY_DISK_RBFLAGS=RB_SINGLE	# boot in single-user mode
+
+# DRMKMS driver
+no i915drmkms*     at pci?
+no radeon*         at pci?
+no nouveau*	   at pci?
+no options 	DRM_LEGACY
+
+# pre-PCI graphics drivers, not enabled in GENERIC
+vga0		at isa?
+pcdisplay0	at isa?			# CGA, MDA, EGA, HGA
+wsdisplay*	at pcdisplay? console ?

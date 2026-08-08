@@ -1,0 +1,63 @@
+/*	$NetBSD: atomic_cas_8_cas.c,v 1.6 2026/05/06 09:55:59 skrll Exp $	*/
+
+/*-
+ * Copyright (c) 2014 The NetBSD Foundation, Inc.
+ * All rights reserved.
+ *
+ * This code is derived from software contributed to The NetBSD Foundation
+ * by Jason R. Thorpe.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR CONTRIBUTORS
+ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#include "atomic_op_namespace.h"
+
+#if !defined(_KERNEL) && !defined(_STANDALONE)
+#include <stdbool.h>
+#endif
+#include <sys/atomic.h>
+#include <sys/stdarg.h>
+
+bool bool_compare_and_swap_1(volatile int8_t *, int8_t, int8_t, ...)
+    asm("__sync_bool_compare_and_swap_1");
+
+bool
+bool_compare_and_swap_1(volatile int8_t *addr, int8_t oldval,
+	int8_t newval, ...)
+{
+	uint8_t oldv = (uint8_t)oldval;
+	uint8_t newv = (uint8_t)newval;
+
+	return atomic_cas_8((volatile uint8_t *)addr, oldv, newv) == oldv;
+}
+
+int8_t sync_val_compare_and_swap_1(volatile int8_t *addr, int8_t old, int8_t new)
+    asm("__sync_val_compare_and_swap_1");
+
+int8_t
+sync_val_compare_and_swap_1(volatile int8_t *addr, int8_t old, int8_t new)
+{
+	const uint8_t oldv = (uint8_t)old;
+	const uint8_t newv = (uint8_t)new;
+
+	return _atomic_cas_8((volatile uint8_t *)addr, oldv, newv);
+}

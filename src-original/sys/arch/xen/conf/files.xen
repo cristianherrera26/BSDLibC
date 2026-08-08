@@ -1,0 +1,62 @@
+#	$NetBSD: files.xen,v 1.190 2026/04/08 20:57:36 andvar Exp $
+
+defflag	opt_xen.h			XEN XENPVHVM PAE DOM0OPS
+
+file	arch/xen/x86/hypervisor_machdep.c	xen
+file	arch/xen/x86/xen_intr.c			xen
+file	arch/xen/xen/xen_machdep.c		xen
+file	arch/xen/xen/evtchn.c			xen
+file	arch/xen/xen/xengnt.c			xen
+file	arch/xen/xen/xenmem.c			xen & !xenpv
+file	arch/xen/x86/xen_mainbus.c		xen
+file	arch/xen/xen/xen_clock.c		xen
+file	arch/xen/x86/xen_bus_dma.c		xen
+file	arch/xen/xen/genfb_xen.c		xen & genfb
+
+file	arch/xen/x86/pvh_consinit.c		xenpvhvm
+
+define hypervisorbus {}
+define xendevbus {}
+
+# Xen hypervisor
+device	hypervisor { [apid = -1]}: isabus, pcibus, sysmon_power, xendevbus, acpibus
+attach hypervisor at hypervisorbus
+file	arch/xen/xen/hypervisor.c	hypervisor needs-flag
+file	arch/xen/xen/shutdown_xenbus.c	hypervisor
+
+# Xenbus
+device xenbus {[id = -1]}
+attach xenbus at xendevbus
+file arch/xen/xenbus/xenbus_client.c xenbus needs-flag
+file arch/xen/xenbus/xenbus_comms.c xenbus needs-flag
+file arch/xen/xenbus/xenbus_dev.c xenbus & kernfs
+file arch/xen/xenbus/xenbus_probe.c xenbus needs-flag
+file arch/xen/xenbus/xenbus_xs.c xenbus needs-flag
+
+# Xen console support
+device	xencons: tty
+attach	xencons at xendevbus
+file	arch/xen/xen/xencons.c		xencons needs-flag
+
+# Xen Network driver
+device	xennet: arp, ether, ifnet
+attach xennet at xenbus
+file	arch/xen/xen/if_xennet_xenbus.c xennet needs-flag
+file	arch/xen/xen/xennet_checksum.c	xvif | xennet
+
+# Xen Block device driver and wd/sd/cd identities
+device	xbd: disk
+attach	xbd at xenbus
+file	arch/xen/xen/xbd_xenbus.c	xbd
+
+# Domain-0 operations
+file	arch/xen/xen/privcmd.c		dom0ops
+file 	arch/xen/x86/xen_shm_machdep.c	dom0ops
+file	arch/xen/xen/xenevt.c		xenevt & dom0ops
+file	arch/xen/xen/xennetback_xenbus.c xvif
+file	arch/xen/xen/xbdback_xenbus.c xbdback
+
+# Xen event pseudo-device
+defpseudo xenevt
+defpseudo xvif
+defpseudo xbdback

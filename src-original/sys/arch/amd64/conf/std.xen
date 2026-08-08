@@ -1,0 +1,20 @@
+# $NetBSD: std.xen,v 1.14 2021/03/04 19:01:41 gdt Exp $
+#
+# standard, required NetBSD/xen 'options'
+# Note that this file is used by both DOM0 and DOMU.
+
+machine xen amd64 x86
+include 	"conf/std"	# MI standard options
+include 	"arch/xen/conf/std.xenversion"
+
+options 	CPU_IN_CKSUM
+options 	EXEC_ELF64	# exec ELF binaries
+options 	EXEC_SCRIPT	# exec #! scripts
+options 	MTRR
+#options 	MULTIPROCESSOR
+
+options 	CHILD_MAX=1024	# 160 is too few
+options 	OPEN_MAX=1024	# 128 is too few
+
+options 	XEN		# Xen support
+include 	"arch/xen/conf/files.xen.pv"

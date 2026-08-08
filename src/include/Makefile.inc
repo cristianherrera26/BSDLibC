@@ -2,7 +2,7 @@ INCS=	libgen.h
 
 # TODO
 # assert.h
-# ctype
+# ctype.h
 # limits.h
 # stddef.h
 # string.h

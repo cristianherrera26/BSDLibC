@@ -7,3 +7,4 @@ INCS=	libgen.h
 # string.h
 # sys/cdefs.h
 # sys/param.h
+# sys/types.h

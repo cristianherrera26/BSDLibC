@@ -38,12 +38,8 @@ __RCSID("$NetBSD: strcpy.c,v 1.4 2018/02/04 20:22:17 mrg Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
 #undef strcpy
 

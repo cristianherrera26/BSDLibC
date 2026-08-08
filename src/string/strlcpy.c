@@ -17,34 +17,15 @@
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
-
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 __RCSID("$NetBSD: strlcpy.c,v 1.4 2024/11/01 21:11:37 riastradh Exp $");
 #endif /* LIBC_SCCS and not lint */
 
-#ifdef _LIBC
-#include "namespace.h"
-#endif
 #include <sys/types.h>
 #include <assert.h>
 #include <string.h>
 
-#ifdef _LIBC
-# ifdef __weak_alias
-__weak_alias(strlcpy, _strlcpy)
-# endif
-#endif
-#else
-#include <lib/libkern/libkern.h>
-#endif /* !_KERNEL && !_STANDALONE */
-
-
-#if !HAVE_STRLCPY
 /*
  * Copy src to string dst of size siz.  At most siz-1 characters
  * will be copied.  Always NUL terminates (unless siz == 0).
@@ -78,4 +59,3 @@ strlcpy(char *__restrict dst, const char *__restrict src, size_t siz)
 
 	return(s - src - 1);	/* count does not include NUL */
 }
-#endif

@@ -38,12 +38,8 @@ __RCSID("$NetBSD: strcat.c,v 1.4 2020/04/07 08:07:58 skrll Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
 #if defined(_FORTIFY_SOURCE) || defined(KASAN)
 #undef strcat

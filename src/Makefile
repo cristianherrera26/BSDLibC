@@ -1,8 +1,9 @@
 LIB=c
 SHLIB_MAJOR=1
 
-CFLAGS += -nostdinc -nostdlib
+CFLAGS += -nostdinc -ffreestanding
 CFLAGS += -I${.CURDIR}/include
+LDADD += -nostdlib -ffreestanding
 
 .PATH: ${.CURDIR}/gen
 .include "${.CURDIR}/gen/Makefile.inc"

@@ -1,7 +1,7 @@
-/*	$NetBSD: strchrnul.c,v 1.1 2016/10/12 20:01:40 christos Exp $	*/
+/*	$NetBSD: strncmp.c,v 1.3 2018/02/04 20:22:17 mrg Exp $	*/
 
-/*-
- * Copyright (c) 1990, 1993
+/*
+ * Copyright (c) 1989, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,31 +32,27 @@
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 #if 0
-static char sccsid[] = "@(#)index.c	8.1 (Berkeley) 6/4/93";
+static char sccsid[] = "@(#)strncmp.c	8.1 (Berkeley) 6/4/93";
 #else
-__RCSID("$NetBSD: strchrnul.c,v 1.1 2016/10/12 20:01:40 christos Exp $");
+__RCSID("$NetBSD: strncmp.c,v 1.3 2018/02/04 20:22:17 mrg Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#include "namespace.h"
 #include <assert.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
-char *
-strchrnul(const char *p, int ch)
+int
+strncmp(const char *s1, const char *s2, size_t n)
 {
-	const char cmp = ch;
-	_DIAGASSERT(p != NULL);
 
-	for (;; ++p) {
-		if (*p == cmp || !*p) {
-			/* LINTED const cast-away */
-			return __UNCONST(p);
-		}
-	}
-	/* NOTREACHED */
+	if (n == 0)
+		return (0);
+	do {
+		if (*s1 != *s2++)
+			return (*(const unsigned char *)s1 -
+			    *(const unsigned char *)--s2);
+		if (*s1++ == 0)
+			break;
+	} while (--n != 0);
+	return (0);
 }

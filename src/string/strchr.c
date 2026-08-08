@@ -1,11 +1,8 @@
-/*	$NetBSD: strcmp.c,v 1.4 2018/02/04 20:22:17 mrg Exp $	*/
+/*	$NetBSD: strchr.c,v 1.7 2020/04/07 08:07:58 skrll Exp $	*/
 
 /*-
  * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
- *
- * This code is derived from software contributed to Berkeley by
- * Chris Torek.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -35,30 +32,31 @@
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 #if 0
-static char sccsid[] = "@(#)strcmp.c	8.1 (Berkeley) 6/4/93";
+static char sccsid[] = "@(#)index.c	8.1 (Berkeley) 6/4/93";
 #else
-__RCSID("$NetBSD: strcmp.c,v 1.4 2018/02/04 20:22:17 mrg Exp $");
+__RCSID("$NetBSD: strchr.c,v 1.7 2020/04/07 08:07:58 skrll Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
+
+#if defined(KASAN)
+#undef strchr
 #endif
 
-#undef strcmp
-
-/*
- * Compare strings.
- */
-int
-strcmp(const char *s1, const char *s2)
+char *
+strchr(const char *p, int ch)
 {
+	const char cmp = ch;
 
-	while (*s1 == *s2++)
-		if (*s1++ == 0)
-			return (0);
-	return (*(const unsigned char *)s1 - *(const unsigned char *)--s2);
+	for (;; ++p) {
+		if (*p == cmp) {
+			/* LINTED const cast-away */
+			return(__UNCONST(p));
+		}
+		if (!*p)
+			return(NULL);
+	}
+	/* NOTREACHED */
 }

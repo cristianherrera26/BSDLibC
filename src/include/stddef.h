@@ -3,6 +3,7 @@
 
 #include <sys/null.h>
 
-#define size_t            __SIZE_TYPE__
+typedef __SIZE_TYPE__		size_t;
+typedef	__UINTPTR_TYPE__	uintptr_t;
 
 #endif

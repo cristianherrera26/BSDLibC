@@ -73,12 +73,13 @@
 #define __has_extension		__has_feature /* Compat with pre-3.0 Clang */
 #endif
 
-#include <machine/cdefs.h>
-#ifdef __ELF__
-#include <sys/cdefs_elf.h>
-#else
-#include <sys/cdefs_aout.h>
-#endif
+// TODO
+//#include <machine/cdefs.h>
+//#ifdef __ELF__
+//#include <sys/cdefs_elf.h>
+//#else
+//#include <sys/cdefs_aout.h>
+//#endif
 
 #ifdef __GNUC__
 #define	__strict_weak_alias(alias,sym)					\

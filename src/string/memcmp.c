@@ -70,14 +70,9 @@ __RCSID("$NetBSD: memcmp.c,v 1.8 2020/01/29 09:18:26 ad Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <sys/types.h>
-
 #include <assert.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif 
 
 #undef memcmp
 /*
@@ -123,7 +118,3 @@ memcmp(const void *s1, const void *s2, size_t n)
 
 	return 0;
 }
-
-#if defined(__ARM_EABI__)
-__strong_alias(__aeabi_memcmp, memcmp)
-#endif

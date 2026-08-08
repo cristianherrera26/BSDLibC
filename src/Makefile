@@ -9,6 +9,8 @@ LDADD += -nostdlib -ffreestanding
 .include "${.CURDIR}/ctype/Makefile.inc"
 .PATH: ${.CURDIR}/gen
 .include "${.CURDIR}/gen/Makefile.inc"
+.PATH: ${.CURDIR}/stdlib
+.include "${.CURDIR}/stdlib/Makefile.inc"
 .PATH: ${.CURDIR}/string
 .include "${.CURDIR}/string/Makefile.inc"
 

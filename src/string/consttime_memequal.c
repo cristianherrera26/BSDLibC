@@ -5,15 +5,7 @@
  * Public domain.
  */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#include "namespace.h"
 #include <string.h>
-#ifdef __weak_alias
-__weak_alias(consttime_memequal,_consttime_memequal)
-#endif
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
 int
 consttime_memequal(const void *b1, const void *b2, size_t len)

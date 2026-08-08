@@ -37,5 +37,7 @@ size_t strlcpy(char *__restrict dst, const char *__restrict src, size_t siz);
 size_t strlcat(char *__restrict dst, const char *__restrict src, size_t siz);
 char *strncpy(char *dst, const char *src, size_t n);
 char *strncat(char *dst, const char *src, size_t n);
+void bzero(void *dst0, size_t length);
+int consttime_memequal(const void *b1, const void *b2, size_t len);
 
 #endif

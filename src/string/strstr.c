@@ -1,8 +1,11 @@
-/*	$NetBSD: strcasecmp.c,v 1.3 2018/08/11 16:25:32 christos Exp $	*/
+/*	$NetBSD: strstr.c,v 1.3 2018/02/04 01:13:45 mrg Exp $	*/
 
-/*
- * Copyright (c) 1987, 1993
+/*-
+ * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Chris Torek.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -29,44 +32,36 @@
  * SUCH DAMAGE.
  */
 
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
-
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 #if 0
-static char sccsid[] = "@(#)strcasecmp.c	8.1 (Berkeley) 6/4/93";
+static char sccsid[] = "@(#)strstr.c	8.1 (Berkeley) 6/4/93";
 #else
-__RCSID("$NetBSD: strcasecmp.c,v 1.3 2018/08/11 16:25:32 christos Exp $");
+__RCSID("$NetBSD: strstr.c,v 1.3 2018/02/04 01:13:45 mrg Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#include "namespace.h"
 #include <assert.h>
-#include <ctype.h>
 #include <string.h>
-#ifdef __weak_alias
-__weak_alias(strcasecmp,_strcasecmp)
-__weak_alias(strncasecmp,_strncasecmp)
-#endif
-#else
-#include <lib/libkern/libkern.h>
-#include <machine/limits.h>
-#endif 
 
-int
-strcasecmp(const char *s1, const char *s2)
+/*
+ * Find the first occurrence of find in s.
+ */
+char *
+strstr(const char *s, const char *find)
 {
-	const unsigned char *us1 = (const unsigned char *)s1,
-			*us2 = (const unsigned char *)s2;
+	char c, sc;
+	size_t len;
 
-	_DIAGASSERT(s1 != NULL);
-	_DIAGASSERT(s2 != NULL);
-
-	while (tolower(*us1) == tolower(*us2++))
-		if (*us1++ == '\0')
-			return (0);
-	return (tolower(*us1) - tolower(*--us2));
+	if ((c = *find++) != 0) {
+		len = strlen(find);
+		do {
+			do {
+				if ((sc = *s++) == 0)
+					return (NULL);
+			} while (sc != c);
+		} while (strncmp(s, find, len) != 0);
+		s--;
+	}
+	return __UNCONST(s);
 }

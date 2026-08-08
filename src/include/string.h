@@ -11,9 +11,15 @@ void *memcpy(void *dst0, const void *src0, size_t length);
 void *memmove(void *dst0, const void *src0, size_t length);
 void *memchr(const void *s, int c, size_t n);
 int memcmp(const void *s1, const void *s2, size_t n);
+void *memset(void *dst0, int c0, size_t length);
 
 int strcmp(const char *s1, const char *s2);
 int strncmp(const char *s1, const char *s2, size_t n);
+char *strstr(const char *s, const char *find);
+char *strnstr(const char *s, const char *find, size_t slen);
+char *strcasestr(const char *s, const char *find);
+int strcasecmp(const char *s1, const char *s2);
+int strncasecmp(const char *s1, const char *s2, size_t n);
 
 char *strrchr(const char *p, int ch);
 char *strchr(const char *p, int ch);

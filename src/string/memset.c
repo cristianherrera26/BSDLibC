@@ -43,17 +43,9 @@ __RCSID("$NetBSD: memset.c,v 1.12 2019/03/30 10:18:03 jmcneill Exp $");
 
 #include <sys/types.h>
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
 #include <limits.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#if defined(BZERO) && defined(_STANDALONE)
-#include <lib/libsa/stand.h>
-#endif
-#include <machine/limits.h>
-#endif 
 
 #define	wsize	sizeof(u_int)
 #define	wmask	(wsize - 1)
@@ -75,26 +67,6 @@ bzero(void *dst0, size_t length)
 #define	RETURN	return (dst0)
 #define	VAL	c0
 #define	WIDEVAL	c
-
-#if defined(__ARM_EABI__)
-void __aeabi_memset(void *, size_t, int);
-void __aeabi_memclr(void *, size_t);
-
-__strong_alias(__aeabi_memset4, __aeabi_memset)
-__strong_alias(__aeabi_memset8, __aeabi_memset)
-
-void
-__aeabi_memset(void *dst0, size_t length, int c)
-{
-	memset(dst0, c, length);
-}
-
-void
-__aeabi_memclr(void *dst0, size_t length)
-{
-	memset(dst0, 0, length);
-}
-#endif
 
 void *
 memset(void *dst0, int c0, size_t length)

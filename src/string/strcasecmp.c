@@ -1,11 +1,8 @@
-/*	$NetBSD: strcasestr.c,v 1.3 2005/11/29 03:12:00 christos Exp $	*/
+/*	$NetBSD: strcasecmp.c,v 1.3 2018/08/11 16:25:32 christos Exp $	*/
 
-/*-
- * Copyright (c) 1990, 1993
+/*
+ * Copyright (c) 1987, 1993
  *	The Regents of the University of California.  All rights reserved.
- *
- * This code is derived from software contributed to Berkeley by
- * Chris Torek.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -34,36 +31,28 @@
 
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
-__RCSID("$NetBSD: strcasestr.c,v 1.3 2005/11/29 03:12:00 christos Exp $");
+#if 0
+static char sccsid[] = "@(#)strcasecmp.c	8.1 (Berkeley) 6/4/93";
+#else
+__RCSID("$NetBSD: strcasecmp.c,v 1.3 2018/08/11 16:25:32 christos Exp $");
+#endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
 #include <assert.h>
 #include <ctype.h>
 #include <string.h>
 
-/*
- * Find the first occurrence of find in s, ignore case.
- */
-char *
-strcasestr(const char *s, const char *find)
+int
+strcasecmp(const char *s1, const char *s2)
 {
-	char c, sc;
-	size_t len;
+	const unsigned char *us1 = (const unsigned char *)s1,
+			*us2 = (const unsigned char *)s2;
 
-	_DIAGASSERT(s != NULL);
-	_DIAGASSERT(find != NULL);
+	_DIAGASSERT(s1 != NULL);
+	_DIAGASSERT(s2 != NULL);
 
-	if ((c = *find++) != 0) {
-		c = tolower((unsigned char)c);
-		len = strlen(find);
-		do {
-			do {
-				if ((sc = *s++) == 0)
-					return (NULL);
-			} while ((char)tolower((unsigned char)sc) != c);
-		} while (strncasecmp(s, find, len) != 0);
-		s--;
-	}
-	return __UNCONST(s);
+	while (tolower(*us1) == tolower(*us2++))
+		if (*us1++ == '\0')
+			return (0);
+	return (tolower(*us1) - tolower(*--us2));
 }

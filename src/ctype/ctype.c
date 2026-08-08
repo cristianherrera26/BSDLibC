@@ -1,8 +1,16 @@
-/*	$NetBSD: strncasecmp.c,v 1.3 2018/08/16 12:03:10 christos Exp $	*/
+/* Only while porting the netbsd ctype functions */
+/* Taken from: FreeBSD (src/sys/sys/ctype.h) */
 
-/*
- * Copyright (c) 1987, 1993
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1988, 1991, 1993
  *	The Regents of the University of California.  All rights reserved.
+ * (c) UNIX System Laboratories, Inc.
+ * All or some portions of this file are derived from material licensed
+ * to the University of California by American Telephone and Telegraph
+ * Co. or Unix System Laboratories, Inc. and are reproduced herein with
+ * the permission of UNIX System Laboratories, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -29,50 +37,68 @@
  * SUCH DAMAGE.
  */
 
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
-
-#include <sys/cdefs.h>
-#if defined(LIBC_SCCS) && !defined(lint)
-#if 0
-static char sccsid[] = "@(#)strcasecmp.c	8.1 (Berkeley) 6/4/93";
-#else
-__RCSID("$NetBSD: strncasecmp.c,v 1.3 2018/08/16 12:03:10 christos Exp $");
-#endif
-#endif /* LIBC_SCCS and not lint */
-
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#include "namespace.h"
-#include <assert.h>
-#include <ctype.h>
-#include <string.h>
-#ifdef __weak_alias
-__weak_alias(strcasecmp,_strcasecmp)
-__weak_alias(strncasecmp,_strncasecmp)
-#endif
-#else
-#include <lib/libkern/libkern.h>
-#include <machine/limits.h>
-#endif 
+int
+isspace(int c)
+{
+	return (c == ' ' || (c >= '\t' && c <= '\r'));
+}
 
 int
-strncasecmp(const char *s1, const char *s2, size_t n)
+isascii(int c)
 {
+	return ((c & ~0x7f) == 0);
+}
 
-	_DIAGASSERT(s1 != NULL);
-	_DIAGASSERT(s2 != NULL);
+int
+isupper(int c)
+{
+	return (c >= 'A' && c <= 'Z');
+}
 
-	if (n != 0) {
-		const unsigned char *us1 = (const unsigned char *)s1,
-				*us2 = (const unsigned char *)s2;
+int
+islower(int c)
+{
+	return (c >= 'a' && c <= 'z');
+}
 
-		do {
-			if (tolower(*us1) != tolower(*us2++))
-				return (tolower(*us1) - tolower(*--us2));
-			if (*us1++ == '\0')
-				break;
-		} while (--n != 0);
-	}
-	return (0);
+int
+isalpha(int c)
+{
+	return (isupper(c) || islower(c));
+}
+
+int
+isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int
+isxdigit(int c)
+{
+	return (isdigit(c) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'));
+}
+
+int
+isprint(int c)
+{
+	return (c >= ' ' && c <= '~');
+}
+
+int
+isgraph(int c)
+{
+	return (c != ' ' && isprint(c));
+}
+
+int
+toupper(int c)
+{
+	return (c - 0x20 * ((c >= 'a') && (c <= 'z')));
+}
+
+int
+tolower(int c)
+{
+	return (c + 0x20 * ((c >= 'A') && (c <= 'Z')));
 }

@@ -39,10 +39,6 @@ __RCSID("$NetBSD: dirname.c,v 1.14 2018/09/27 00:45:34 kre Exp $");
 #include <limits.h>
 #include <string.h>
 
-#ifdef __weak_alias
-__weak_alias(dirname,_dirname)
-#endif
-
 static size_t
 xdirname_r(const char *path, char *buf, size_t buflen)
 {
@@ -89,7 +85,6 @@ out:
 	return len;
 }
 
-#if !HAVE_DIRNAME
 char *
 dirname(char *path)
 {
@@ -97,4 +92,3 @@ dirname(char *path)
 	(void)xdirname_r(path, result, sizeof(result));
 	return result;
 }
-#endif

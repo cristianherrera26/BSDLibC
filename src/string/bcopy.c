@@ -41,15 +41,8 @@ __RCSID("$NetBSD: bcopy.c,v 1.13 2018/02/12 11:14:15 martin Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#if !defined(MEMCOPY) && defined(_STANDALONE)
-#include <lib/libsa/stand.h>
-#endif
-#endif
 
 #if defined(_FORTIFY_SOURCE) || defined(_STANDALONE) || defined(_KERNEL)
 #undef bcopy

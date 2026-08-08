@@ -34,16 +34,11 @@
 __RCSID("$NetBSD: basename.c,v 1.12 2023/01/18 08:07:22 simonb Exp $");
 #endif /* !LIBC_SCCS && !lint */
 
-#include "namespace.h"
 #include <sys/param.h>
 #include <libgen.h>
 #include <string.h>
 #include <limits.h>
 #include <string.h>
-
-#ifdef __weak_alias
-__weak_alias(basename,_basename)
-#endif
 
 static size_t
 xbasename_r(const char *path, char *buf, size_t buflen)
@@ -88,8 +83,6 @@ out:
 	return len;
 }
 
-#if !HAVE_BASENAME
-
 char *
 basename(char *path)
 {
@@ -98,5 +91,3 @@ basename(char *path)
 	(void)xbasename_r(path, result, sizeof(result));
 	return result;
 }
-
-#endif

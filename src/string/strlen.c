@@ -1,8 +1,8 @@
-/*	$NetBSD: strnlen.c,v 1.2 2014/01/09 11:25:11 apb Exp $	*/
+/*	$NetBSD: strlen.c,v 1.3 2018/02/06 09:28:48 mrg Exp $	*/
 
 /*-
- * Copyright (c) 2009 David Schultz <das@FreeBSD.org>
- * All rights reserved.
+ * Copyright (c) 1990, 1993
+ *	The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -12,11 +12,14 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -26,32 +29,23 @@
  * SUCH DAMAGE.
  */
 
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
-
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
-__RCSID("$NetBSD: strnlen.c,v 1.2 2014/01/09 11:25:11 apb Exp $");
-#endif /* LIBC_SCCS and not lint */
-/* FreeBSD: src/lib/libc/string/strnlen.c,v 1.1 2009/02/28 06:00:58 das Exp */
-
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#include <string.h>
+#if 0
+static char sccsid[] = "@(#)strlen.c	8.1 (Berkeley) 6/4/93";
 #else
-#include <lib/libkern/libkern.h>
+__RCSID("$NetBSD: strlen.c,v 1.3 2018/02/06 09:28:48 mrg Exp $");
 #endif
+#endif /* LIBC_SCCS and not lint */
 
-#if !HAVE_STRNLEN
+#include <string.h>
+
 size_t
-strnlen(const char *s, size_t maxlen)
+strlen(const char *str)
 {
-	size_t len;
+	const char *s;
 
-	for (len = 0; len < maxlen; len++, s++) {
-		if (!*s)
-			break;
-	}
-	return (len);
+	for (s = str; *s; ++s)
+		continue;
+	return(s - str);
 }
-#endif /* !HAVE_STRNLEN */

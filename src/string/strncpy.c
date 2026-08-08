@@ -1,4 +1,4 @@
-/*	$NetBSD: strncat.c,v 1.3 2018/02/04 01:13:45 mrg Exp $	*/
+/*	$NetBSD: strncpy.c,v 1.4 2018/02/04 01:13:45 mrg Exp $	*/
 
 /*-
  * Copyright (c) 1990, 1993
@@ -35,43 +35,39 @@
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 #if 0
-static char sccsid[] = "@(#)strncat.c	8.1 (Berkeley) 6/4/93";
+static char sccsid[] = "@(#)strncpy.c	8.1 (Berkeley) 6/4/93";
 #else
-__RCSID("$NetBSD: strncat.c,v 1.3 2018/02/04 01:13:45 mrg Exp $");
+__RCSID("$NetBSD: strncpy.c,v 1.4 2018/02/04 01:13:45 mrg Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
 #ifdef _FORTIFY_SOURCE
-#undef strncat
+#undef strncpy
 #endif
 
 /*
- * Concatenate src on the end of dst.  At most strlen(dst)+n+1 bytes
- * are written at dst (at most n+1 bytes being appended).  Return dst.
+ * Copy src to dst, truncating or null-padding to always copy n bytes.
+ * Return dst.
  */
 char *
-strncat(char *dst, const char *src, size_t n)
+strncpy(char *dst, const char *src, size_t n)
 {
 
 	if (n != 0) {
 		char *d = dst;
 		const char *s = src;
 
-		while (*d != 0)
-			d++;
 		do {
-			if ((*d = *s++) == 0)
+			if ((*d++ = *s++) == 0) {
+				/* NUL pad the remaining n-1 bytes */
+				while (--n != 0)
+					*d++ = 0;
 				break;
-			d++;
+			}
 		} while (--n != 0);
-		*d = 0;
 	}
 	return (dst);
 }

@@ -17,34 +17,15 @@
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
-
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 __RCSID("$NetBSD: strlcat.c,v 1.5 2024/11/01 21:11:37 riastradh Exp $");
 #endif /* LIBC_SCCS and not lint */
 
-#ifdef _LIBC
-#include "namespace.h"
-#endif
 #include <sys/types.h>
 #include <assert.h>
 #include <string.h>
 
-#ifdef _LIBC
-# ifdef __weak_alias
-__weak_alias(strlcat, _strlcat)
-# endif
-#endif
-
-#else
-#include <lib/libkern/libkern.h>
-#endif /* !_KERNEL && !_STANDALONE */
-
-#if !HAVE_STRLCAT
 /*
  * Appends src to string dst of size siz (unlike strncat, siz is the
  * full size of dst, not space left).  At most siz-1 characters
@@ -98,4 +79,3 @@ strlcat(char *__restrict dst, const char *__restrict src, size_t siz)
 	return dlen + strlcpy(dst + dlen, src, siz - dlen);
 #endif
 }
-#endif

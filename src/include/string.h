@@ -33,5 +33,6 @@ char *strcpy(char *to, const char *from);
 char *stpcpy(char * __restrict to, const char * __restrict from);
 
 size_t strlcpy(char *__restrict dst, const char *__restrict src, size_t siz);
+size_t strlcat(char *__restrict dst, const char *__restrict src, size_t siz);
 
 #endif

@@ -17,8 +17,6 @@ LDADD += -nostdlib -ffreestanding
 .include "${.CURDIR}/string/Makefile.inc"
 .PATH: ${.CURDIR}/syscall
 .include "${.CURDIR}/syscall/Makefile.inc"
-.PATH: ${.CURDIR}/crt
-.include "${.CURDIR}/crt/Makefile.inc"
 
 .PATH: ${.CURDIR}/include
 .include "${.CURDIR}/include/Makefile.inc"

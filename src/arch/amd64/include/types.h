@@ -34,8 +34,6 @@
 #ifndef	_X86_64_TYPES_H_
 #define	_X86_64_TYPES_H_
 
-#ifdef __x86_64__
-
 #include <sys/cdefs.h>
 #include <sys/featuretest.h>
 #include <machine/int_types.h>
@@ -120,11 +118,5 @@ typedef	unsigned char		__cpu_simple_lock_nv_t;
 #define	__HAVE_CPU_UAREA_ROUTINES 1
 #endif
 #endif
-
-#else	/*	!__x86_64__	*/
-
-#include <i386/types.h>
-
-#endif	/*	__x86_64__	*/
 
 #endif	/* _X86_64_TYPES_H_ */

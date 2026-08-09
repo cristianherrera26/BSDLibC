@@ -38,7 +38,6 @@ __RCSID("$NetBSD: strtok.c,v 1.12 2004/10/27 19:12:31 dsl Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include <namespace.h>
 #include <string.h>
 
 char *

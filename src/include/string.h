@@ -15,6 +15,7 @@ void *memset(void *dst0, int c0, size_t length);
 void *memmem(const void *h0, size_t k, const void *n0, size_t l);
 void *memccpy(void *t, const void *f, int c, size_t n);
 void *mempcpy(void *__restrict dst, const void *__restrict src, size_t len);
+void *memrchr(const void *s, int c, size_t n);
 
 int strcmp(const char *s1, const char *s2);
 int strncmp(const char *s1, const char *s2, size_t n);
@@ -30,6 +31,8 @@ char *rindex(const char *p, int ch);
 char *index(const char *p, int ch);
 char *strsep(char **stringp, const char *delim);
 char *strpbrk(const char *s, const char *charset);
+char *strtok_r(char *s, const char *delim, char **lasts);
+char *strtok(char *s, const char *delim);
 
 char *strchrnul(const char *p, int ch);
 

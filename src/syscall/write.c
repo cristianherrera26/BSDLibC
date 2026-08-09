@@ -5,5 +5,5 @@
 ssize_t
 write(int fd, const char *buf, size_t count)
 {
-	return __syscall3(SYS_write, fd, (buf, count);
+	return __syscall3(SYS_write, fd, buf, count);
 }

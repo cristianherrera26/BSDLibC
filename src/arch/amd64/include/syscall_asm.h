@@ -60,6 +60,4 @@
 	(long)ret;									\
 })
 
-#undef __long
-
 #endif

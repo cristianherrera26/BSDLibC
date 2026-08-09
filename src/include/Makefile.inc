@@ -1,6 +1,6 @@
 INCS=	libgen.h sys/utsname.h sys/featuretest.h
 
-# TODO
+# WIK
 # assert.h
 # ctype.h
 # limits.h

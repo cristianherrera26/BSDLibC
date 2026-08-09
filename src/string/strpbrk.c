@@ -28,38 +28,20 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD: strpbrk.c,v 1.3 2024/01/20 14:55:11 christos Exp $");
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
-#include <inttypes.h>
-#include <limits.h>
+#include <stdint.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
-#define FAST_STRPBRK 1
 #define UC(a) ((unsigned int)(unsigned char)(a))
 
-#ifdef FAST_STRPBRK
 #define ADD_NEW_TO_SET(i) (set[inv[i] = idx++] = (i))
 #define IS_IN_SET(i) (inv[i] < idx && set[inv[i]] == (i))
 #define ADD_TO_SET(i) (void)(IS_IN_SET(i) || /*LINTED no effect*/ADD_NEW_TO_SET(i))
-#else
-#define IS_IN_SET(i) (set[(i) >> 3] & idx[(i) & 7])
-#define ADD_TO_SET(i) (void)(set[(i) >> 3] |= idx[(i) & 7])
-#endif
 
 char *
 strpbrk(const char *s, const char *charset)
 {
-#ifdef FAST_STRPBRK
 	uint8_t set[256], inv[256], idx = 0;
-#else
-	static const size_t idx[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
-	uint8_t set[32];
-
-	(void)memset(set, 0, sizeof(set));
-#endif
 
 	if (charset[0] == '\0')
 		return NULL;

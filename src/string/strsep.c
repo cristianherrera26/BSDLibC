@@ -38,22 +38,9 @@ __RCSID("$NetBSD: strsep.c,v 1.3 2007/06/04 18:19:28 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
-#include "namespace.h"
-
 #include <assert.h>
 #include <string.h>
 
-#ifdef __weak_alias
-__weak_alias(strsep,_strsep)
-#endif
-
-#else
-#include <sys/param.h>
-#include <lib/libkern/libkern.h>
-#endif /* !_KERNEL && !_STANDALONE */
-
-#if !HAVE_STRSEP
 /*
  * Get next token from string *stringp, where tokens are possibly-empty
  * strings separated by characters from delim.  
@@ -94,4 +81,3 @@ strsep(char **stringp, const char *delim)
 	}
 	/* NOTREACHED */
 }
-#endif

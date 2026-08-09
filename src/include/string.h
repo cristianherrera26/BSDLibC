@@ -28,6 +28,8 @@ char *strrchr(const char *p, int ch);
 char *strchr(const char *p, int ch);
 char *rindex(const char *p, int ch);
 char *index(const char *p, int ch);
+char *strsep(char **stringp, const char *delim);
+char *strpbrk(const char *s, const char *charset);
 
 char *strchrnul(const char *p, int ch);
 

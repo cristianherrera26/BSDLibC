@@ -1,1 +1,1 @@
-SRCS+=	_exit.c write.c
+SRCS+=	_exit.c uname.c write.c

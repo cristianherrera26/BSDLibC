@@ -1,4 +1,4 @@
-INCS=	libgen.h
+INCS=	libgen.h sys/utsname.h sys/featuretest.h
 
 # TODO
 # assert.h

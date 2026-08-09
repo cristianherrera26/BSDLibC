@@ -18,4 +18,7 @@ LDADD += -nostdlib -ffreestanding
 .PATH: ${.CURDIR}/syscall
 .include "${.CURDIR}/syscall/Makefile.inc"
 
+.PATH: ${.CURDIR}/include
+.include "${.CURDIR}/include/Makefile.inc"
+
 .include <bsd.lib.mk>

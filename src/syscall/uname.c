@@ -38,77 +38,12 @@ __RCSID("$NetBSD: uname.c,v 1.12 2014/06/14 13:09:37 apb Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
-#include <sys/param.h>
-#include <sys/sysctl.h>
 #include <sys/utsname.h>
-
-#include <assert.h>
-#include <errno.h>
-
-#ifdef __weak_alias
-__weak_alias(uname,_uname)
-#endif
+#include <syscall_arch.h>
+#include <syscalls.h>
 
 int
 uname(struct utsname *name)
 {
-	int mib[2];
-	size_t len;
-	char *p;
-
-	_DIAGASSERT(name != NULL);
-
-	mib[0] = CTL_KERN;
-	mib[1] = KERN_OSTYPE;
-	len = sizeof(name->sysname);
-	if (sysctl(mib, 2, &name->sysname, &len, NULL, 0) == -1)
-		goto error;
-
-	mib[0] = CTL_KERN;
-	mib[1] = KERN_HOSTNAME;
-	len = sizeof(name->nodename);
-	if (sysctl(mib, 2, &name->nodename, &len, NULL, 0) == -1)
-		goto error;
-
-	mib[0] = CTL_KERN;
-	mib[1] = KERN_OSRELEASE;
-	len = sizeof(name->release);
-	if (sysctl(mib, 2, &name->release, &len, NULL, 0) == -1)
-		goto error;
-
-	mib[0] = CTL_KERN;
-	mib[1] = KERN_VERSION;
-	len = sizeof(name->version);
-	if (sysctl(mib, 2, &name->version, &len, NULL, 0) == -1) {
-		if (errno == ENOMEM) {
-			/*
-			 * string is too long for {struct utsname}.version.
-			 * Just use the truncated string.
-			 * XXX: We could mark the truncation with "..."
-			 */
-			name->version[sizeof(name->version) - 1] = '\0';
-		}
-		else goto error;
-	}
-
-	/* The version may have newlines in it, turn them into spaces. */
-	for (p = name->version; len--; ++p) {
-		if (*p == '\n' || *p == '\t') {
-			if (len > 1)
-				*p = ' ';
-			else
-				*p = '\0';
-		}
-	}
-
-	mib[0] = CTL_HW;
-	mib[1] = HW_MACHINE;
-	len = sizeof(name->machine);
-	if (sysctl(mib, 2, &name->machine, &len, NULL, 0) == -1)
-		goto error;
-	return (0);
-
-error:
-	return (-1);
+	return __syscall1(SYS_uname, (long)name);
 }

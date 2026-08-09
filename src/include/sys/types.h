@@ -216,8 +216,7 @@ typedef	int		psetid_t;
 typedef volatile __cpu_simple_lock_nv_t __cpu_simple_lock_t;
 
 #if defined(_KERNEL) || defined(_STANDALONE)
-// TODO
-//#include <sys/stdbool.h>
+#include <sys/stdbool.h>
 
 /*
  * Deprecated Mach-style boolean_t type.  Should not be used by new code.

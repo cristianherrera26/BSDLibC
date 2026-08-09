@@ -37,10 +37,8 @@ __RCSID("$NetBSD: mempcpy.c,v 1.4 2025/12/19 14:25:17 christos Exp $");
 
 #include <string.h>
 
-#if !HAVE_MEMPCPY
 void *
 mempcpy(void *__restrict dst, const void *__restrict src, size_t len)
 {
 	return (char *)memcpy(dst, src, len) + len;
 }
-#endif

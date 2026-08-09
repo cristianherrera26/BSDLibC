@@ -29,12 +29,8 @@ __RCSID("$NetBSD: memmem.c,v 1.6 2024/12/14 16:48:13 riastradh Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <string.h>
 #include <stdint.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
 static char *twobyte_memmem(const unsigned char *h, size_t k,
     const unsigned char *n)

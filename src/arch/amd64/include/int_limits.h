@@ -36,8 +36,6 @@
 #include <sys/common_int_limits.h>
 #else
 
-#ifdef __x86_64__
-
 /*
  * 7.18.2 Limits of specified-width integer types
  */
@@ -129,12 +127,6 @@
 
 /* limit of size_t */
 #define	SIZE_MAX	0xffffffffffffffffUL		/* size_t	  */
-
-#else	/*	__x86_64__	*/
-
-#include <i386/int_limits.h>
-
-#endif	/*	__x86_64__	*/
 
 #endif
 

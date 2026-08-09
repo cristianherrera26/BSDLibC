@@ -1,5 +1,5 @@
-#include <syscall_arch.h>
-#include <syscalls.h>
+#include <sys/syscall.h>
+#include <syscall_asm.h>
 #include <stddef.h>
 
 ssize_t

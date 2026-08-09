@@ -3,8 +3,8 @@ USE_SHLIBDIR=yes
 
 MACHINE != uname -m
 
-CFLAGS += -nostdinc -ffreestanding
-CFLAGS += -I${.CURDIR}/include -I${.CURDIR}/arch/${MACHINE}/include
+CFLAGS += -nostdinc -ffreestanding -fno-stack-protector
+CFLAGS += -I${.CURDIR}/include -I${.CURDIR}/arch/${MACHINE} -I${.CURDIR}/arch/${MACHINE}/include
 LDADD += -nostdlib -ffreestanding
 
 .PATH: ${.CURDIR}/ctype

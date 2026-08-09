@@ -1,4 +1,4 @@
-/*	$NetBSD: int_const.h,v 1.5 2014/07/25 21:43:13 joerg Exp $	*/
+/*	$NetBSD: int_mwgwtypes.h,v 1.8 2014/07/25 21:43:13 joerg Exp $	*/
 
 /*-
  * Copyright (c) 2001 The NetBSD Foundation, Inc.
@@ -29,42 +29,43 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _AMD64_INT_CONST_H_
-#define _AMD64_INT_CONST_H_
+#ifndef _AMD64_INT_MWGWTYPES_H_
+#define _AMD64_INT_MWGWTYPES_H_
 
-#ifdef __INTMAX_C_SUFFIX__
-#include <sys/common_int_const.h>
+#ifdef __UINT_FAST64_TYPE__
+#include <sys/common_int_mwgwtypes.h>
 #else
 
-#ifdef __x86_64__
-
 /*
- * 7.18.4 Macros for integer constants
+ * 7.18.1 Integer types
  */
 
-/* 7.18.4.1 Macros for minimum-width integer constants */
+/* 7.18.1.2 Minimum-width integer types */
 
-#define	INT8_C(c)	c
-#define	INT16_C(c)	c
-#define	INT32_C(c)	c
-#define	INT64_C(c)	c ## L
+typedef	signed char		  int_least8_t;
+typedef	unsigned char		 uint_least8_t;
+typedef	short int		 int_least16_t;
+typedef	unsigned short int	uint_least16_t;
+typedef	int			 int_least32_t;
+typedef	unsigned int		uint_least32_t;
+typedef	long int		 int_least64_t;
+typedef	unsigned long int	uint_least64_t;
 
-#define	UINT8_C(c)	c
-#define	UINT16_C(c)	c
-#define	UINT32_C(c)	c ## U
-#define	UINT64_C(c)	c ## UL
+/* 7.18.1.3 Fastest minimum-width integer types */
+typedef	int			   int_fast8_t;
+typedef	unsigned int		  uint_fast8_t;
+typedef	int			  int_fast16_t;
+typedef	unsigned int		 uint_fast16_t;
+typedef	int			  int_fast32_t;
+typedef	unsigned int		 uint_fast32_t;
+typedef	long int		  int_fast64_t;
+typedef	unsigned long int	 uint_fast64_t;
 
-/* 7.18.4.2 Macros for greatest-width integer constants */
+/* 7.18.1.5 Greatest-width integer types */
 
-#define	INTMAX_C(c)	c ## L
-#define	UINTMAX_C(c)	c ## UL
-
-#else	/*	__x86_64__	*/
-
-#include <i386/int_const.h>
-
-#endif	/*	__x86_64__	*/
+typedef	long int		      intmax_t;
+typedef	unsigned long int	     uintmax_t;
 
 #endif
 
-#endif /* !_AMD64_INT_CONST_H_ */
+#endif /* !_AMD64_INT_MWGWTYPES_H_ */

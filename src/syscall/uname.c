@@ -39,8 +39,8 @@ __RCSID("$NetBSD: uname.c,v 1.12 2014/06/14 13:09:37 apb Exp $");
 #endif /* LIBC_SCCS and not lint */
 
 #include <sys/utsname.h>
-#include <syscall_arch.h>
-#include <syscalls.h>
+#include <sys/syscall.h>
+#include <syscall_asm.h>
 
 int
 uname(struct utsname *name)

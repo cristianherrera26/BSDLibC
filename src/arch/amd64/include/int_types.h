@@ -38,8 +38,6 @@
 #include <sys/common_int_types.h>
 #else
 
-#ifdef __x86_64__
-
 #include <sys/cdefs.h>
 
 /*
@@ -63,12 +61,6 @@ typedef	unsigned long int	__uint64_t;
 
 typedef	long		       __intptr_t;
 typedef	unsigned long	      __uintptr_t;
-
-#else	/*	__x86_64__	*/
-
-#include <i386/int_types.h>
-
-#endif	/*	__x86_64__	*/
 
 #endif
 

@@ -34,8 +34,6 @@
 #ifndef	_X86_64_LIMITS_H_
 #define	_X86_64_LIMITS_H_
 
-#ifdef __x86_64__
-
 #include <sys/featuretest.h>
 
 #define	CHAR_BIT	8		/* number of bits in a char */
@@ -90,11 +88,5 @@
 #define FLT_MAX		__FLT_MAX__
 #define FLT_MIN		__FLT_MIN__
 #endif
-
-#else	/*	__x86_64__	*/
-
-#include <i386/limits.h>
-
-#endif	/*	__x86_64__	*/
 
 #endif /* _X86_64_LIMITS_H_ */

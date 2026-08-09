@@ -28,14 +28,10 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD: strcspn.c,v 1.2 2018/02/04 01:13:45 mrg Exp $");
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
-#include <inttypes.h>
+#include <stdint.h>
 #include <limits.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
 /* 64bit version is in strspn.c */
 #if ULONG_MAX != 0xffffffffffffffffull

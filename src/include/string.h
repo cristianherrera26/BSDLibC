@@ -33,6 +33,8 @@ char *strsep(char **stringp, const char *delim);
 char *strpbrk(const char *s, const char *charset);
 char *strtok_r(char *s, const char *delim, char **lasts);
 char *strtok(char *s, const char *delim);
+size_t strspn(const char *s, const char *charset);
+size_t strcspn(const char *s, const char *charset);
 
 char *strchrnul(const char *p, int ch);
 

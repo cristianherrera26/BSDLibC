@@ -28,14 +28,10 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD: strspn.c,v 1.3 2023/06/18 22:18:13 rillig Exp $");
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
-#include <inttypes.h>
+#include <stdint.h>
 #include <limits.h>
 #include <string.h>
-#else
-#include <lib/libkern/libkern.h>
-#endif
 
 #if ULONG_MAX != 0xffffffffffffffffull
 

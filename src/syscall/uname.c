@@ -45,5 +45,5 @@ __RCSID("$NetBSD: uname.c,v 1.12 2014/06/14 13:09:37 apb Exp $");
 int
 uname(struct utsname *name)
 {
-	return __syscall1(SYS_uname, (long)name);
+	return __syscall1(SYS_uname, name);
 }

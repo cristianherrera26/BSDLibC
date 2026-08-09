@@ -1,2 +1,2 @@
 # BSDLibC
-A tried to port NetBSD LibC to Linux
+An attempt to port NetBSD LibC to Linux

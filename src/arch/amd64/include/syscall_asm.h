@@ -1,5 +1,5 @@
-#ifndef _ARCH_SYSCALL_ARCH
-#define _ARCH_SYSCALL_ARCH	1
+#ifndef _ARCH_SYSCALL_ASM
+#define _ARCH_SYSCALL_ASM	1
 
 #define __long(var)	((long)var)
 

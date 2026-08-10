@@ -34,20 +34,25 @@
 */
 
 #define _NETBSD_SOURCE
-#include <sys/utsname.h> /* We'll only need struct utsname (please don't use the uname function) */
+#include <sys/utsname.h>	/* We need for SYS_NMLN */
 #include <sys/syscall.h>
 #include <sys/sysctl.h>
 #include <syscall_asm.h>
 #include <string.h>
-// #include <errno.h>
-
-/* Why not include errno.h? */
-/* errno has several problems, so better avoid it until fix it */
 
 #define OSREV_VALUE	201109	/* Don't ask me why */
 
+struct utsname_int {
+	char sysname[SYS_NMLN];
+	char release[SYS_NMLN];
+	char version[SYS_NMLN];
+	char nodename[SYS_NMLN];
+	char machine[SYS_NMLN];
+	char domainname[SYS_NMLN];
+};
+
 static struct cache {
-	struct utsname uts;
+	struct utsname_int uts;
 } sysctl_cache;
 
 static int

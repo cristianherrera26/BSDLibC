@@ -39,23 +39,18 @@
 
 #include <sys/featuretest.h>
 
-#define	_SYS_NMLN	65
+#define	_SYS_NMLN	255
 
 #if defined(_NETBSD_SOURCE)
 #define	SYS_NMLN	_SYS_NMLN
 #endif
 
 struct utsname {
-	char	sysname[_SYS_NMLN];	/* Name of the kernel. */
+	char	sysname[_SYS_NMLN];	/* Name of this OS. */
 	char	nodename[_SYS_NMLN];	/* Name of this network node. */
 	char	release[_SYS_NMLN];	/* Release level. */
 	char	version[_SYS_NMLN];	/* Version level. */
 	char	machine[_SYS_NMLN];	/* Hardware type. */
-#if defined(_GNU_SOURCE) || defined(_NETBSD_SOURCE)
-	char	domainname[_SYS_NMLN];	/* NIS/YP domain name */
-#else
-	char	__domainname[_SYS_NMLN]; /* NIS/YP domain name */
-#endif
 };
 
 #include <sys/cdefs.h>

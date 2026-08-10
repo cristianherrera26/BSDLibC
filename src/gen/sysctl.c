@@ -1,5 +1,6 @@
 #include <sys/sysctl.h>
 #include <sys/types.h>
+#include <unistd.h>
 #include <stddef.h>
 
 static int user_sysctl(const int *, unsigned int, void *,
@@ -12,9 +13,10 @@ sysctl(const int *name, unsigned int namelen, void *oldp,
 
 	oldlen = (oldlenp == NULL) ? 0 : *oldlenp;
 
-	if (name[0] == CTL_USER)
-		return user_sysctl(name + 1, namelen - 1, oldp, &oldlen, newp, newlen);
-	return -1;
+	if (name[0] != CTL_USER)
+		return __sysctl(name, namelen, oldp, &oldlen, newp, newlen);
+
+	return user_sysctl(name + 1, namelen - 1, oldp, &oldlen, newp, newlen);
 }
 
 static int

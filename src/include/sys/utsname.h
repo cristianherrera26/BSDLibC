@@ -53,6 +53,8 @@ struct utsname {
 	char	machine[_SYS_NMLN];	/* Hardware type. */
 #if defined(_GNU_SOURCE) || defined(_NETBSD_SOURCE)
 	char	domainname[_SYS_NMLN];	/* NIS/YP domain name */
+#else
+	char	__domainname[_SYS_NMLN]; /* NIS/YP domain name */
 #endif
 };
 

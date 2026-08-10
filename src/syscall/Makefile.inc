@@ -1,1 +1,1 @@
-SRCS+=	_exit.c close.c fork.c munmap.c read.c uname.c write.c
+SRCS+=	_exit.c close.c fork.c munmap.c read.c __sysctl.c uname.c write.c

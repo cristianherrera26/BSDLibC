@@ -5,7 +5,7 @@
  };
  
 -#define __NEW_UTS_LEN 64
-+#define __NEW_UTS_LEN 255
++#define __NEW_UTS_LEN 254
  
  struct old_utsname {
  	char sysname[65];

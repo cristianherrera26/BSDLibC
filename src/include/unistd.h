@@ -11,6 +11,8 @@ void _exit(int exit_code);
 int
 __sysctl(const int *name, unsigned int namelen, void *oldp,
         size_t *oldlenp, const void *newp, size_t newlen);
+int getdomainname(char *name, size_t namelen);
+int gethostname(char *name, size_t namelen);
 
 int close(int fd);
 

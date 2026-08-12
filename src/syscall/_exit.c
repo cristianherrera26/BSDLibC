@@ -1,3 +1,4 @@
+#include <sys/cdefs.h>
 #include <sys/syscall.h>
 #include <syscall_asm.h>
 

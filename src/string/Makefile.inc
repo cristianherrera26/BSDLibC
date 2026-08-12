@@ -1,5 +1,5 @@
-SRCS+=	bcopy.c bzero.c consttime_memequal.c index.c memchr.c memccpy.c memcmp.c memcpy.c memmem.c memmove.c \
-	mempcpy.c memrchr.c memset.c rindex.c stpcpy.c stpncpy.c strcat.c strchr.c strchrnul.c strcmp.c strcpy.c \
+SRCS+=	bcopy.c bzero.c consttime_memequal.c memchr.c memccpy.c memcmp.c memcpy.c memmem.c memmove.c \
+	mempcpy.c memrchr.c memset.c stpcpy.c stpncpy.c strcat.c strchr.c strchrnul.c strcmp.c strcpy.c \
 	strcspn.c strcasecmp.c strcasestr.c strlcat.c strlcpy.c strlen.c strncasecmp.c strncat.c strncmp.c \
 	strncpy.c strnlen.c strnstr.c strpbrk.c strrchr.c strsep.c strspn.c strstr.c strtok.c strtok_r.c
 

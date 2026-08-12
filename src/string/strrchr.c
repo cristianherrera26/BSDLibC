@@ -38,13 +38,18 @@ __RCSID("$NetBSD: strrchr.c,v 1.7 2020/04/07 08:07:58 skrll Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
+#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include <assert.h>
 #include <string.h>
+#else
+#include <lib/libkern/libkern.h>
+#endif
 
 #if defined(KASAN)
 #undef strrchr
 #endif
 
+__strong_alias(rindex, strrchr)
 char *
 strrchr(const char *p, int ch)
 {

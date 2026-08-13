@@ -39,7 +39,7 @@
 
 #include <sys/featuretest.h>
 
-#define	_SYS_NMLN	255
+#define	_SYS_NMLN	65
 
 #if defined(_NETBSD_SOURCE)
 #define	SYS_NMLN	_SYS_NMLN

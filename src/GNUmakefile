@@ -10,8 +10,8 @@ LIB_SYMLINKS=lib$(LIBNAME)$(SO_SUFFIX) lib$(LIBNAME)$(SO_SUFFIX).$(major)
 MACHINE_HOST := $(shell uname -m)
 MACHINE ?= $(MACHINE_HOST)
 
-ifeq ($(MACHINE), x86_64)
-MACHINE=amd64
+ifeq ($(MACHINE),x86_64)
+MACHINE := amd64
 endif
 
 CFLAGS=-nostdlib -nostdinc -ffreestanding -fno-stack-protector -I$(CURDIR)/include -I$(CURDIR)/arch/$(MACHINE) -I$(CURDIR)/arch/$(MACHINE)/machine

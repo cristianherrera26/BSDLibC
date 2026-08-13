@@ -14,7 +14,13 @@ ifeq ($(MACHINE),x86_64)
 MACHINE := amd64
 endif
 
+DESTDIR ?=
+PREFIX ?= /usr
+LIBDIR ?= $(PREFIX)/lib
+INCDIR ?= $(PREFIX)/include
+
 CFLAGS=-nostdlib -nostdinc -ffreestanding -fno-stack-protector -I$(CURDIR)/include -I$(CURDIR)/arch/$(MACHINE) -I$(CURDIR)/arch/$(MACHINE)/machine
+CFLAGS+= -fPIC
 LDFLAGS=-nostdlib -ffreestanding -fno-stack-protector -Wl,-soname,lib$(LIBNAME)$(SO_SUFFIX).$(major)
 
 STRING_SRCS := $(wildcard string/*.c)
@@ -35,8 +41,9 @@ all: $(ALL_OBJS) $(LIB) $(LIB_SYMLINKS)
 $(LIB): $(ALL_OBJS)
 	$(CC) -shared -o $@ $(LDFLAGS) $(ALL_OBJS)
 $(LIB_SYMLINKS): $(LIB)
-	ln -sv $< $@
+	ln -s $< $@
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
 clean:
 	rm -rf $(ALL_OBJS) $(LIB) $(LIB_SYMLINKS)
+install: install-lib install-includes

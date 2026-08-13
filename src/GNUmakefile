@@ -4,7 +4,8 @@ LIBNAME=c
 SO_NAME=$(major).$(minor)
 SO_SUFFIX=.so
 
-LIB := lib$(LIBNAME)$(SO_SUFFIX).$(SO_NAME)
+LIB_DYNAMIC := lib$(LIBNAME)$(SO_SUFFIX).$(SO_NAME)
+LIB_STATIC := lib$(LIBNAME).a
 LIB_SYMLINKS=lib$(LIBNAME)$(SO_SUFFIX) lib$(LIBNAME)$(SO_SUFFIX).$(major)
 
 MACHINE_HOST := $(shell uname -m)
@@ -36,14 +37,34 @@ MACHINE_INCLUDES := $(wildcard arch/$(MACHINE)/machine/*.h)
 ALL_SRCS := $(STRING_SRCS) $(CTYPE_SRCS) $(SYSCALL_SRCS) $(GEN_SRCS) $(STDLIB_SRCS)
 ALL_OBJS := $(ALL_SRCS:%.c=%.o)
 
-all: $(ALL_OBJS) $(LIB) $(LIB_SYMLINKS)
+all: $(ALL_OBJS) $(LIB_DYNAMIC) $(LIB_STATIC)
 
-$(LIB): $(ALL_OBJS)
+$(LIB_DYNAMIC): $(ALL_OBJS)
 	$(CC) -shared -o $@ $(LDFLAGS) $(ALL_OBJS)
-$(LIB_SYMLINKS): $(LIB)
-	ln -s $< $@
+$(LIB_STATIC): $(ALL_OBJS)
+	$(AR) rcs -o $@ $(ALL_OBJS)
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
+
+install: $(LIB_DYNAMIC) $(LIB_STATIC) install-includes install-libs $(LIB_SYMLINKS)
+
+install-libs:
+	install -d $(DESTDIR)$(LIBDIR)
+	install -m 755 $(LIB_DYNAMIC) $(DESTDIR)$(LIBDIR)
+	install -m 644 $(LIB_STATIC) $(DESTDIR)$(LIBDIR)
+$(LIB_SYMLINKS): install-libs
+	ln -sf $(LIB_DYNAMIC) $(DESTDIR)$(LIBDIR)/$@
+
+install-includes:
+	install -d $(DESTDIR)$(INCDIR)
+	install -m 644 $(GENERAL_INCLUDES) $(DESTDIR)$(INCDIR)
+
+	install -d $(DESTDIR)$(INCDIR)/sys
+	install -m 644 $(SYSTEM_INCLUDES) $(DESTDIR)$(INCDIR)/sys
+
+	install -d $(DESTDIR)$(INCDIR)/$(MACHINE)
+	install -m 644 $(MACHINE_INCLUDES) $(DESTDIR)$(INCDIR)/$(MACHINE)
+	ln -sf $(MACHINE) $(DESTDIR)$(INCDIR)/machine
 clean:
-	rm -rf $(ALL_OBJS) $(LIB) $(LIB_SYMLINKS)
-install: install-lib install-includes
+	rm -rf $(ALL_OBJS) $(LIB_DYNAMIC) $(LIB_STATIC) $(LIB_SYMLINKS)
+.PHONY:

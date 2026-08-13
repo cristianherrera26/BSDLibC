@@ -5,7 +5,7 @@ PREFIX ?= /usr
 MANDIR ?= $(PREFIX)/share/man
 
 INSTALL ?= install
-LINK ?= ln -s
+LINK ?= ln -sf
 
 all:
 

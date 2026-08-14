@@ -33,5 +33,5 @@
 int
 close(int fd)
 {
-	return __syscall1(SYS_fork, fd);
+	return __syscall1(SYS_close, fd);
 }

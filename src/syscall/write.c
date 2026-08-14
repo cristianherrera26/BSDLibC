@@ -27,9 +27,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <sys/types.h>
 #include <sys/syscall.h>
 #include <syscall_asm.h>
-#include <stddef.h>
 
 ssize_t
 write(int fd, const char *buf, size_t count)

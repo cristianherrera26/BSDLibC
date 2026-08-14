@@ -43,6 +43,8 @@
 
 #define OSREV_VALUE	201109	/* Don't ask me why */
 
+#define max_size(size, max)	(((size) > (max)) ? (max) : (size))
+
 struct utsname_int {
 	char sysname[SYS_NMLN];
 	char release[SYS_NMLN];
@@ -94,7 +96,7 @@ __kern_sysctl(const int *name, unsigned int namelen, void *oldp,
 				return -1;
 		}
 
-		flenp = (flenp > SYS_NMLN) ? SYS_NMLN : flenp;
+		flenp = max_size(flenp, SYS_NMLN);
 	}
 
 /* Please don't change memcpy for x function. It's planned to include */
@@ -133,13 +135,13 @@ __hw_sysctl(const int *name, unsigned int namelen, void *oldp,
 
 	switch (name[0]) {
 	case HW_MACHINE:
-		int machine_len = sizeof(MACHINE);
-		flenp = (flenp > machine_len) ? machine_len : flenp;
+		size_t machine_len = sizeof(MACHINE);
+		flenp = max_size(flenp, machine_len);
 		memcpy(oldp, MACHINE, flenp);
 		break;
 	case HW_MACHINE_ARCH:
-		int machine_arch_len = sizeof(MACHINE_ARCH);
-		flenp = (flenp > machine_arch_len) ? machine_arch_len : flenp;
+		size_t machine_arch_len = sizeof(MACHINE_ARCH);
+		flenp = max_size(flenp, machine_arch_len);
 		memcpy(oldp, MACHINE_ARCH, flenp);
 		break;
 	default:

@@ -1,4 +1,5 @@
 -include shlib_version
+-include ../config.mk
 
 LIBNAME=c
 SO_NAME=$(major).$(minor)
@@ -14,11 +15,6 @@ MACHINE ?= $(MACHINE_HOST)
 ifeq ($(MACHINE),x86_64)
 MACHINE := amd64
 endif
-
-DESTDIR ?=
-PREFIX ?= /usr
-LIBDIR ?= $(PREFIX)/lib
-INCDIR ?= $(PREFIX)/include
 
 CFLAGS=-nostdlib -nostdinc -ffreestanding -fno-stack-protector -I$(CURDIR)/include -I$(CURDIR)/arch/$(MACHINE) -I$(CURDIR)/arch/$(MACHINE)/machine
 CFLAGS+= -fPIC

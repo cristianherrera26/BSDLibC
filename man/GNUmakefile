@@ -1,13 +1,9 @@
-MAN_PAGES_3 := $(wildcard *.3)
+-include ../config.mk
 
-DESTDIR ?=
-PREFIX ?= /usr
-MANDIR ?= $(PREFIX)/share/man
+MAN_PAGES_3 := $(wildcard *.3)
 
 INSTALL ?= install
 LINK ?= ln -sf
-
-all:
 
 install: install-man3 install-man3-symlinks
 
@@ -31,4 +27,3 @@ install-man3-symlinks: install-man3
 	$(LINK) memcpy.3 $(DESTDIR)$(MANDIR)/man3/mempcpy.3
 	$(LINK) strcpy.3 $(DESTDIR)$(MANDIR)/man3/stpcpy.3
 	$(LINK) strncpy.3 $(DESTDIR)$(MANDIR)/man3/stpncpy.3
-clean:

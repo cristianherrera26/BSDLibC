@@ -1,3 +1,5 @@
+-include config.mk
+
 all:
 	$(MAKE) -C src all
 install:

@@ -35,6 +35,7 @@
 
 #define _NETBSD_SOURCE
 #include <sys/utsname.h>	/* We need for SYS_NMLN */
+#include <sys/param.h>		/* MACHINE and MACHINE_ARCH */
 #include <sys/syscall.h>
 #include <sys/sysctl.h>
 #include <syscall_asm.h>
@@ -47,7 +48,7 @@ struct utsname_int {
 	char release[SYS_NMLN];
 	char version[SYS_NMLN];
 	char nodename[SYS_NMLN];
-	char machine[SYS_NMLN];
+	char machine[SYS_NMLN]; /* This value we don't use it but it's required for Linux ABI */
 	char domainname[SYS_NMLN];
 };
 
@@ -132,14 +133,14 @@ __hw_sysctl(const int *name, unsigned int namelen, void *oldp,
 
 	switch (name[0]) {
 	case HW_MACHINE:
+		int machine_len = sizeof(MACHINE);
+		flenp = (flenp > machine_len) ? machine_len : flenp;
+		memcpy(oldp, MACHINE, flenp);
+		break;
 	case HW_MACHINE_ARCH:
-		if (sysctl_cache.uts.sysname[0] == '\0') {
-			if ((__syscall1(SYS_uname, &sysctl_cache.uts)) < 0)
-				return -1;
-		}
-
-		flenp = (flenp > SYS_NMLN) ? SYS_NMLN : flenp;
-		memcpy(oldp, sysctl_cache.uts.machine, flenp); /* Linux does not have machine_arch so callback to machine */
+		int machine_arch_len = sizeof(MACHINE_ARCH);
+		flenp = (flenp > machine_arch_len) ? machine_arch_len : flenp;
+		memcpy(oldp, MACHINE_ARCH, flenp);
 		break;
 	default:
 		return -1;

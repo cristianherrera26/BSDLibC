@@ -50,7 +50,7 @@ struct utsname_int {
 	char release[SYS_NMLN];
 	char version[SYS_NMLN];
 	char nodename[SYS_NMLN];
-	char machine[SYS_NMLN]; /* We don't this value but it's required for Linux ABI */
+	char machine[SYS_NMLN]; /* We don't use this value but it's required for Linux ABI */
 	char domainname[SYS_NMLN];
 };
 

@@ -5,5 +5,5 @@
 void
 sync(void)
 {
-	return __syscall0(SYS_sync);
+	__syscall0(SYS_sync);
 }

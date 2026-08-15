@@ -90,6 +90,9 @@ __kern_sysctl(const int *name, unsigned int namelen, void *oldp,
 {
 	size_t flenp = *oldlenp;
 
+	if (newlen != 0 && newp != NULL)
+		goto set;
+
 	if (name[0] < 6) {
 		if (sysctl_cache.uts.sysname[0] == '\0') {
 			if ((__syscall1(SYS_uname, &sysctl_cache.uts)) < 0)
@@ -99,6 +102,7 @@ __kern_sysctl(const int *name, unsigned int namelen, void *oldp,
 		flenp = max_size(flenp, SYS_NMLN);
 	}
 
+/* In this switch we get information of KERN_* variables */
 /* Please don't change memcpy for x function. It's planned to include */
 /* an optimized version of memcpy for x86_64 in assembler */
 	switch (name[0]) {
@@ -119,6 +123,23 @@ __kern_sysctl(const int *name, unsigned int namelen, void *oldp,
 		break;
 	case KERN_OSREV:
 		*(int*)oldp = OSREV_VALUE;
+		break;
+	default:
+		return -1;
+	}
+
+	return 0;
+
+set:
+/* In this switch we set information of some KERN_* variables using newp and newlen */
+	switch (name[0]) {
+	case KERN_HOSTNAME:
+		if (__syscall2(SYS_sethostname, newp, newlen) != 0)
+			return -1;
+		break;
+	case KERN_DOMAINNAME:
+		if (__syscall2(SYS_setdomainname, newp, newlen) != 0)
+			return -1;
 		break;
 	default:
 		return -1;

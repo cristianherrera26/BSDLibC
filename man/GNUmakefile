@@ -27,3 +27,5 @@ install-man3-symlinks: install-man3
 	$(LINK) memcpy.3 $(DESTDIR)$(MANDIR)/man3/mempcpy.3
 	$(LINK) strcpy.3 $(DESTDIR)$(MANDIR)/man3/stpcpy.3
 	$(LINK) strncpy.3 $(DESTDIR)$(MANDIR)/man3/stpncpy.3
+	$(LINK) gethostname.3 $(DESTDIR)$(MANDIR)/man3/sethostname.3
+	$(LINK) getdomainname.3 $(DESTDIR)$(MANDIR)/man3/setdomainname.3

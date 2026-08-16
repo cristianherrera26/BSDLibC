@@ -1,4 +1,6 @@
 /* Note: this is a basic crt0 implementation for non-supported architecture */
+/* Public Domain */
+
 #include <unistd.h>
 
 extern int main();

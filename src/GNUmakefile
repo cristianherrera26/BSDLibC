@@ -20,18 +20,7 @@ CFLAGS=-nostdlib -nostdinc -ffreestanding -fno-stack-protector -I$(CURDIR)/inclu
 CFLAGS+= -fPIC
 LDFLAGS=-nostdlib -ffreestanding -fno-stack-protector -Wl,-soname,lib$(LIBNAME)$(SO_SUFFIX).$(major)
 
-STRING_SRCS := $(wildcard string/*.c)
-CTYPE_SRCS := $(wildcard ctype/*.c)
-SYSCALL_SRCS := $(wildcard syscall/*.c)
-GEN_SRCS := $(wildcard gen/*.c)
-STDLIB_SRCS := $(wildcard stdlib/*.c)
-
-GENERAL_INCLUDES := $(wildcard include/*.h)
-SYSTEM_INCLUDES := $(wildcard include/sys/*.h)
-MACHINE_INCLUDES := $(wildcard arch/$(MACHINE)/machine/*.h)
-
-ALL_SRCS := $(STRING_SRCS) $(CTYPE_SRCS) $(SYSCALL_SRCS) $(GEN_SRCS) $(STDLIB_SRCS)
-ALL_OBJS := $(ALL_SRCS:%.c=%.o)
+-include src-config.mk
 
 all: $(ALL_OBJS) $(LIB_DYNAMIC) $(LIB_STATIC)
 

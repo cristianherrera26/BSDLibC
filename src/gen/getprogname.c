@@ -39,10 +39,7 @@
 __RCSID("$NetBSD: getprogname.c,v 1.5 2021/04/20 21:42:32 christos Exp $");
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
-
 #include <stdlib.h>
-#include "csu-common.h"
 
 #ifdef __weak_alias
 __weak_alias(getprogname,_getprogname)
@@ -51,6 +48,9 @@ __weak_alias(getprogname,_getprogname)
 const char *
 getprogname(void)
 {
-
+#if 0
 	return (__progname);
+#else
+	return "unknown";	/* We dont have implemented argc/argv yet */
+#endif
 }

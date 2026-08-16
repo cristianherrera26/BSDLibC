@@ -5,5 +5,7 @@ int abs(int j);
 long labs(long j);
 long long int llabs(long long int j);
 void _Exit(int exit_code);
+const char *getprogname(void);
+void setprogname(const char *progname);
 
 #endif

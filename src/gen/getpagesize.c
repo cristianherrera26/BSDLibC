@@ -38,7 +38,6 @@ __RCSID("$NetBSD: getpagesize.c,v 1.11 2012/06/24 15:26:03 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
 #include <sys/param.h>
 #include <sys/sysctl.h>
 #include <assert.h>

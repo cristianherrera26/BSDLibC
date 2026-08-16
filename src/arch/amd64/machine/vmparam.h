@@ -37,9 +37,7 @@
 #ifndef _X86_64_VMPARAM_H_
 #define _X86_64_VMPARAM_H_
 
-#ifdef __x86_64__
-
-#include <sys/mutex.h>
+//#include <sys/mutex.h>
 #ifdef _KERNEL_OPT
 #include "opt_xen.h"
 #endif
@@ -181,11 +179,5 @@ extern vaddr_t vm_max_kernel_address;
 #define	VM_FREELIST_FIRST4G	3
 #define	VM_FREELIST_FIRST1G	4
 #define	VM_FREELIST_FIRST16	5
-
-#else	/*	!__x86_64__	*/
-
-#include <i386/vmparam.h>
-
-#endif	/*	__x86_64__	*/
 
 #endif /* _X86_64_VMPARAM_H_ */

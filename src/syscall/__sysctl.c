@@ -40,6 +40,8 @@
 #include <sys/sysctl.h>
 #include <syscall_asm.h>
 #include <string.h>
+/* machine depends headers */
+#include <machine/vmparam.h>
 
 #define OSREV_VALUE	201109	/* Don't ask me why */
 
@@ -58,25 +60,20 @@ static struct cache {
 	struct utsname_int uts;
 } sysctl_cache;
 
-static int
-__kern_sysctl(const int *name, unsigned int namelen, void *oldp,
-        size_t *oldlenp, const void *newp, size_t newlen);
-static int
-__hw_sysctl(const int *name, unsigned int namelen, void *oldp,
-        size_t *oldlenp, const void *newp, size_t newlen);
+static int kern___sysctl(const int *name, unsigned int namelen, void *oldp, size_t *oldlenp, const void *newp, size_t newlen);
+static int hw___sysctl(const int *name, unsigned int namelen, void *oldp, size_t *oldlenp, const void *newp, size_t newlen);
 
 int
-__sysctl(const int *name, unsigned int namelen, void *oldp,
-        size_t *oldlenp, const void *newp, size_t newlen)
+__sysctl(const int *name, unsigned int namelen, void *oldp, size_t *oldlenp, const void *newp, size_t newlen)
 {
 	if ((name + 1) == NULL || (namelen - 1) == 0)
 		return -1;
 
 	switch (name[0]) {
 	case CTL_KERN:
-		return __kern_sysctl(name + 1, namelen - 1, oldp, oldlenp, newp, newlen);
+		return kern___sysctl(name + 1, namelen - 1, oldp, oldlenp, newp, newlen);
 	case CTL_HW:
-		return __hw_sysctl(name + 1, namelen - 1, oldp, oldlenp, newp, newlen);
+		return hw___sysctl(name + 1, namelen - 1, oldp, oldlenp, newp, newlen);
 	default:
 		break;
 	}
@@ -85,8 +82,7 @@ __sysctl(const int *name, unsigned int namelen, void *oldp,
 }
 
 static int
-__kern_sysctl(const int *name, unsigned int namelen, void *oldp,
-        size_t *oldlenp, const void *newp, size_t newlen)
+kern___sysctl(const int *name, unsigned int namelen, void *oldp, size_t *oldlenp, const void *newp, size_t newlen)
 {
 	size_t flenp = *oldlenp;
 
@@ -149,8 +145,7 @@ set:
 }
 
 static int
-__hw_sysctl(const int *name, unsigned int namelen, void *oldp,
-        size_t *oldlenp, const void *newp, size_t newlen)
+hw___sysctl(const int *name, unsigned int namelen, void *oldp, size_t *oldlenp, const void *newp, size_t newlen)
 {
 	size_t flenp = *oldlenp;
 
@@ -164,6 +159,9 @@ __hw_sysctl(const int *name, unsigned int namelen, void *oldp,
 		size_t machine_arch_len = sizeof(MACHINE_ARCH);
 		flenp = max_size(flenp, machine_arch_len);
 		memcpy(oldp, MACHINE_ARCH, flenp);
+		break;
+	case HW_PAGESIZE:
+		*(int*)oldp = PAGE_SIZE;
 		break;
 	default:
 		return -1;

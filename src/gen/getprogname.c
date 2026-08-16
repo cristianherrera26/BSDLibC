@@ -45,12 +45,10 @@ __RCSID("$NetBSD: getprogname.c,v 1.5 2021/04/20 21:42:32 christos Exp $");
 __weak_alias(getprogname,_getprogname)
 #endif
 
+extern const char *__progname;
+
 const char *
 getprogname(void)
 {
-#if 0
 	return (__progname);
-#else
-	return "unknown";	/* We dont have implemented argc/argv yet */
-#endif
 }

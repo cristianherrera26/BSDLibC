@@ -22,7 +22,7 @@ LDFLAGS=-nostdlib -ffreestanding -fno-stack-protector -Wl,-soname,lib$(LIBNAME)$
 
 -include src-config.mk
 
-all: $(ALL_OBJS) $(LIB_DYNAMIC) $(LIB_STATIC)
+all: $(ALL_OBJS) $(LIB_DYNAMIC) $(LIB_STATIC) crt-obj
 
 $(LIB_DYNAMIC): $(ALL_OBJS)
 	$(CC) -shared -o $@ $(LDFLAGS) $(ALL_OBJS)
@@ -30,9 +30,12 @@ $(LIB_STATIC): $(ALL_OBJS)
 	$(AR) rcs -o $@ $(ALL_OBJS)
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
+crt-obj:
+	MACHINE=$(MACHINE) $(MAKE) -C crt all
+install: $(LIB_DYNAMIC) $(LIB_STATIC) install-includes install-libs $(LIB_SYMLINKS) crt-install
 
-install: $(LIB_DYNAMIC) $(LIB_STATIC) install-includes install-libs $(LIB_SYMLINKS)
-
+crt-install:
+	MACHINE=$(MACHINE) $(MAKE) -C crt install
 install-libs:
 	install -d $(DESTDIR)$(LIBDIR)
 	install -m 755 $(LIB_DYNAMIC) $(DESTDIR)$(LIBDIR)
@@ -52,4 +55,5 @@ install-includes:
 	ln -sf $(MACHINE) $(DESTDIR)$(INCDIR)/machine
 clean:
 	rm -rf $(ALL_OBJS) $(LIB_DYNAMIC) $(LIB_STATIC) $(LIB_SYMLINKS)
+	MACHINE=$(MACHINE) $(MAKE) -C crt clean
 .PHONY:

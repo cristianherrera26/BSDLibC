@@ -28,6 +28,7 @@ int issetugid(void);
 int chroot(const char *path);
 int chdir(const char *path);
 int fchdir(int fd);
+int fchroot(int fd);
 
 ssize_t readlink(const char *path, char *buf, size_t count);
 

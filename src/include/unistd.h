@@ -32,6 +32,9 @@ ssize_t readlink(const char *path, char *buf, size_t count);
 int unveil(const char *path, const char *permissions);
 int pledge(const char *promises, const char *execpromises);
 
+int sethostid(long hostid);
+long gethostid(void);
+
 #define STDIN_FILENO  0
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2

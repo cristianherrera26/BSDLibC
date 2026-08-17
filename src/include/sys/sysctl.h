@@ -16,6 +16,7 @@ int sysctl(const int *, unsigned int, void *, size_t *, const void *, size_t);
 #define KERN_HOSTNAME	4
 #define KERN_DOMAINNAME	5
 #define KERN_OSREV	6
+#define KERN_HOSTID	7
 
 #define HW_MACHINE	1
 #define HW_MACHINE_ARCH	2

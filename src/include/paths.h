@@ -101,6 +101,7 @@
 #define	_PATH_VIDEO	"/dev/video"
 #define	_PATH_VIDEO0	"/dev/video0"
 #define	_PATH_WATCHDOG	"/dev/watchdog"
+#define _PATH_HOSTID	"/etc/hostid"
 
 /*
  * Provide trailing slash, since mostly used for building pathnames.

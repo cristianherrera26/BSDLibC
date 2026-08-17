@@ -41,6 +41,8 @@
 #include <syscall_asm.h>
 #include <unistd.h>
 #include <string.h>
+#include <fcntl.h>
+#include <paths.h>
 /* machine depends headers */
 #include <machine/vmparam.h>
 
@@ -121,6 +123,21 @@ kern___sysctl(const int *name, unsigned int namelen, void *oldp, size_t *oldlenp
 	case KERN_OSREV:
 		*(int*)oldp = OSREV_VALUE;
 		break;
+	case KERN_HOSTID:
+		int fd;
+		if ((fd = open(_PATH_HOSTID, O_RDONLY)) < 0) {
+#define _DEFAULT_HOSTID 12345678
+#if defined(_DEFAULT_HOSTID)
+			*(long*)oldp = _DEFAULT_HOSTID;
+			return 0;
+#else
+			return -1;
+#endif
+		}
+		if (read(fd, oldp, sizeof(*(long*)oldp)) < 0)
+			return -1;
+		close(fd);
+		break;
 	default:
 		return -1;
 	}
@@ -137,6 +154,14 @@ set:
 	case KERN_DOMAINNAME:
 		if (__syscall2(SYS_setdomainname, newp, newlen) != 0)
 			return -1;
+		break;
+	case KERN_HOSTID:
+		int fd;
+		if ((fd = open(_PATH_HOSTID, O_WRONLY)) < 0)
+			return -1;
+		if (write(fd, newp, newlen) < 0)
+			return -1;
+		close(fd);
 		break;
 	default:
 		return -1;

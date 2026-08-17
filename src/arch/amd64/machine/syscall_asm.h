@@ -20,14 +20,14 @@
 	unsigned long ret;								\
 	__asm__ __volatile__ ("syscall" : "=a"(ret) : "a"(n), "D"__long(a1), 		\
 				"S"__long(a2) : "rcx", "r11", "memory");		\
-	(long)ret;									\
+	__long(ret);									\
 })
 
 #define __syscall3(n, a1, a2, a3) ({							\
 	unsigned long ret;								\
 	__asm__ __volatile__ ("syscall" : "=a"(ret) : "a"(n), "D"__long(a1), 		\
 				"S"__long(a2), "d"__long(a3) : "rcx", "r11", "memory");	\
-	(long)ret;									\
+	__long(ret);									\
 })
 
 #define __syscall4(n, a1, a2, a3, a4) ({						\
@@ -36,7 +36,7 @@
 	__asm__ __volatile__ ("syscall" : "=a"(ret) : "a"(n), "D"__long(a1), 		\
 				"S"__long(a2), "d"__long(a3), "r"(r10) :		\
 				"rcx", "r11", "memory");				\
-	(long)ret;									\
+	__long(ret);									\
 })
 
 #define __syscall5(n, a1, a2, a3, a4, a5) ({						\
@@ -46,7 +46,7 @@
 	__asm__ __volatile__ ("syscall" : "=a"(ret) : "a"(n), "D"__long(a1), 		\
 				"S"__long(a2), "d"__long(a3), "r"(r10), "r"(r8) :	\
 				"rcx", "r11", "memory");				\
-	(long)ret;									\
+	__long(ret);									\
 })
 
 #define __syscall6(n, a1, a2, a3, a4, a5, a6) ({					\
@@ -57,7 +57,7 @@
 	__asm__ __volatile__ ("syscall" : "=a"(ret) : "a"(n), "D"__long(a1), 		\
 				"S"__long(a2), "d"__long(a3), "r"(r10), "r"(r8),	\
 				"r"(r9) : "rcx", "r11", "memory");			\
-	(long)ret;									\
+	__long(ret);									\
 })
 
 #endif

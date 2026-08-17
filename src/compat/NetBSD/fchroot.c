@@ -34,7 +34,7 @@
 int
 fchroot(int fd)
 {
-	if (chdir(fd) != 0)
+	if (fchdir(fd) != 0)
 		return -1;
 	if (chroot(".") != 0)
 		return -1;

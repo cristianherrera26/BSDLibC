@@ -25,6 +25,7 @@ uid_t geteuid(void);
 gid_t getgid(void);
 gid_t getegid(void);
 int issetugid(void);
+int chroot(const char *path);
 
 ssize_t readlink(const char *path, char *buf, size_t count);
 

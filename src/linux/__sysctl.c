@@ -126,7 +126,6 @@ kern___sysctl(const int *name, unsigned int namelen, void *oldp, size_t *oldlenp
 	case KERN_HOSTID:
 		int fd;
 		if ((fd = open(_PATH_HOSTID, O_RDONLY)) < 0) {
-#define _DEFAULT_HOSTID 12345678
 #if defined(_DEFAULT_HOSTID)
 			*(long*)oldp = _DEFAULT_HOSTID;
 			return 0;

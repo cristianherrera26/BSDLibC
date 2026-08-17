@@ -26,6 +26,8 @@ gid_t getgid(void);
 gid_t getegid(void);
 int issetugid(void);
 int chroot(const char *path);
+int chdir(const char *path);
+int fchdir(int fd);
 
 ssize_t readlink(const char *path, char *buf, size_t count);
 

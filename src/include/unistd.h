@@ -19,4 +19,8 @@ int close(int fd);
 void sync(void);
 int getpagesize(void);
 
+/* OpenBSD compatibility layer */
+int unveil(const char *path, const char *permissions);
+int pledge(const char *promises, const char *execpromises);
+
 #endif

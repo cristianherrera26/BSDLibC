@@ -39,6 +39,7 @@
 #include <sys/syscall.h>
 #include <sys/sysctl.h>
 #include <syscall_asm.h>
+#include <unistd.h>
 #include <string.h>
 /* machine depends headers */
 #include <machine/vmparam.h>

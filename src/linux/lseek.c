@@ -27,21 +27,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef _AMD64_SYSCALLS_H
-#define _AMD64_SYSCALLS_H	1
+#include <sys/types.h>
+#include <sys/syscall.h>
+#include <syscall_asm.h>
+#include <unistd.h>
 
-#define SYS_read               0
-#define SYS_write              1
-#define SYS_close              3
-#define SYS_lseek              8
-#define SYS_mmap               9
-#define SYS_munmap             11
-#define SYS_getpid             39
-#define SYS_fork               57
-#define SYS_exit               60
-#define SYS_uname              63
-#define SYS_sync               162
-#define SYS_sethostname        170
-#define SYS_setdomainname      171
-
-#endif
+off_t
+lseek(int fd, off_t offset, int whence)
+{
+	return __syscall3(SYS_lseek, fd, offset, whence);
+}

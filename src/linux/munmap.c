@@ -27,13 +27,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <sys/cdefs.h>
 #include <sys/syscall.h>
+#include <sys/types.h>
 #include <syscall_asm.h>
+#include <sys/mmap.h>
 
-__strong_alias(_Exit, _exit)
-void
-_exit(int exit_code)
+int
+munmap(void *start, size_t len)
 {
-	__syscall1(SYS_exit, exit_code);
+	return __syscall2(SYS_munmap, start, len);
 }

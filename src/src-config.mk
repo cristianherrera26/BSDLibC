@@ -1,6 +1,6 @@
 STRING := $(wildcard string/*.c)
 CTYPE := $(wildcard ctype/*.c)
-SYSCALL := $(wildcard syscall/*.c)
+SYSCALL := $(wildcard linux/*.c)
 GEN := $(wildcard gen/*.c)
 STDLIB := $(wildcard stdlib/*.c)
 COMPAT_OPENBSD := $(wildcard compat/OpenBSD/*.c)

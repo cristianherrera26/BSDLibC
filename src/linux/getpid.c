@@ -30,9 +30,10 @@
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <syscall_asm.h>
+#include <unistd.h>
 
-void
-sync(void)
+pid_t
+getpid(void)
 {
-	__syscall0(SYS_sync);
+	return __syscall0(SYS_getpid);
 }

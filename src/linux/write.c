@@ -30,9 +30,10 @@
 #include <sys/types.h>
 #include <sys/syscall.h>
 #include <syscall_asm.h>
+#include <unistd.h>
 
-off_t
-lseek(int fd, off_t offset, int whence)
+ssize_t
+write(int fd, const void *buf, size_t count)
 {
-	return __syscall3(SYS_lseek, fd, offset, whence);
+	return __syscall3(SYS_write, fd, buf, count);
 }

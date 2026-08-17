@@ -18,9 +18,22 @@ int gethostname(char *name, size_t namelen);
 int close(int fd);
 void sync(void);
 int getpagesize(void);
+int brk(void *addr);
+void *sbrk(intptr_t increment);
+uid_t getuid(void);
+uid_t geteuid(void);
+gid_t getgid(void);
+gid_t getegid(void);
+int issetugid(void);
+
+ssize_t readlink(const char *path, char *buf, size_t count);
 
 /* OpenBSD compatibility layer */
 int unveil(const char *path, const char *permissions);
 int pledge(const char *promises, const char *execpromises);
+
+#define STDIN_FILENO  0
+#define STDOUT_FILENO 1
+#define STDERR_FILENO 2
 
 #endif

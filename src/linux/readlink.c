@@ -27,28 +27,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef _AMD64_SYSCALLS_H
-#define _AMD64_SYSCALLS_H	1
+#include <sys/types.h>
+#include <sys/syscall.h>
+#include <syscall_asm.h>
+#include <unistd.h>
 
-#define SYS_read               0
-#define SYS_write              1
-#define SYS_close              3
-#define SYS_lseek              8
-#define SYS_mmap               9
-#define SYS_munmap             11
-#define SYS_brk                12
-#define SYS_madvise            28
-#define SYS_getpid             39
-#define SYS_fork               57
-#define SYS_exit               60
-#define SYS_uname              63
-#define SYS_readlink           89
-#define SYS_getuid             102
-#define SYS_getgid             104
-#define SYS_geteuid            107
-#define SYS_getegid            108
-#define SYS_sync               162
-#define SYS_sethostname        170
-#define SYS_setdomainname      171
-
-#endif
+ssize_t
+readlink(const char *path, char *buf, size_t count)
+{
+	return __syscall3(SYS_readlink, path, buf, count);
+}

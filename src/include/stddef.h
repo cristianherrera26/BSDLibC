@@ -10,4 +10,6 @@ typedef	__UINTPTR_TYPE__	uintptr_t;
 typedef __SIZE_TYPE__ ssize_t;
 #undef unsigned
 
+#define offsetof(type, member) __builtin_offsetof(type, member)
+
 #endif

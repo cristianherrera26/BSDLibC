@@ -50,4 +50,7 @@ char *strncat(char *dst, const char *src, size_t n);
 void bzero(void *dst0, size_t length);
 int consttime_memequal(const void *b1, const void *b2, size_t len);
 
+char *strdup(const char *str);
+char *strndup(const char *str, size_t n);
+
 #endif

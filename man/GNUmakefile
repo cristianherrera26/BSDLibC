@@ -32,3 +32,5 @@ install-man3-symlinks: install-man3
 	$(LINK) getprogname.3 $(DESTDIR)$(MANDIR)/man3/setprogname.3
 	$(LINK) gethostid.3 $(DESTDIR)$(MANDIR)/man3/sethostid.3
 	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/qsort_r.3
+	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/heapsort.3
+	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/heapsort_r.3

@@ -28,4 +28,7 @@ void qsort(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *))
 int reallocarr(void *ptr, size_t number, size_t size);
 void *reallocarray(void *optr, size_t nmemb, size_t size);
 
+int heapsort_r(void *vbase, size_t nmemb, size_t size, int (*compar)(const void *, const void *, void *), void *cookie);
+int heapsort(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *));
+
 #endif

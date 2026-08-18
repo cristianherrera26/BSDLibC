@@ -56,24 +56,18 @@ __RCSID("$NetBSD: heapsort.c,v 1.4 2025/03/02 16:35:40 riastradh Exp $");
 
 #include <lib/libkern/libkern.h>
 #else	/* _KERNEL || _STANDALONE */
-#include "namespace.h"
 #include <sys/types.h>
 
 #include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
+#endif
 
 #if HAVE_NBTOOL_CONFIG_H
 /* XXX Now, re-apply the renaming that we undid above. */
 #define heapsort	__nbcompat_heapsort
 #define heapsort_r	__nbcompat_heapsort_r
 #endif
-
-#ifdef __weak_alias
-__weak_alias(heapsort,_heapsort)
-__weak_alias(heapsort_r,_heapsort_r)
-#endif
-#endif	/* _KERNEL || _STANDALONE */
 
 /*
  * Swap two areas of size number of bytes.  Although qsort(3) permits random

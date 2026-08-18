@@ -55,18 +55,12 @@ __RCSID("$NetBSD: merge.c,v 1.17 2025/03/02 16:35:41 riastradh Exp $");
  * (The default is pairwise merging.)
  */
 
-#include "namespace.h"
 #include <sys/types.h>
 
 #include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ifdef __weak_alias
-__weak_alias(mergesort,_mergesort)
-__weak_alias(mergesort_r,_mergesort_r)
-#endif
 
 static void setup(u_char *, u_char *, size_t, size_t,
     int (*)(const void *, const void *, void *), void *);

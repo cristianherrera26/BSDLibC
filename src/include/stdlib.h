@@ -31,4 +31,7 @@ void *reallocarray(void *optr, size_t nmemb, size_t size);
 int heapsort_r(void *vbase, size_t nmemb, size_t size, int (*compar)(const void *, const void *, void *), void *cookie);
 int heapsort(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *));
 
+int mergesort(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *));
+int mergesort_r(void *base, size_t nmemb, size_t size, int (*cmp)(const void *, const void *, void *), void *cookie);
+
 #endif

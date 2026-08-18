@@ -37,8 +37,6 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD: reallocarray.c,v 1.12 2022/10/28 09:43:59 wiz Exp $");
 
-#include "namespace.h"
-
 #define _OPENBSD_SOURCE
 #include <errno.h>
 #include <stdlib.h>

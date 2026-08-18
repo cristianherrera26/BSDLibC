@@ -21,4 +21,7 @@ void free(void *ptr);
 void *malloc(size_t size);
 int posix_memalign(void **, size_t, size_t);
 
+void qsort_r(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *, void *), void *cookie);
+void qsort(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *));
+
 #endif

@@ -38,16 +38,10 @@ __RCSID("$NetBSD: strdup.c,v 1.14 2012/06/25 22:32:46 abs Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
-
 #include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ifdef __weak_alias
-__weak_alias(strdup,_strdup)
-#endif
 
 char *
 strdup(const char *str)

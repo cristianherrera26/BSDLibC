@@ -36,3 +36,4 @@ install-man3-symlinks: install-man3
 	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/heapsort_r.3
 	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/mergesort.3
 	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/mergesort_r.3
+	$(LINK) strdup.3 $(DESTDIR)$(MANDIR)/man3/strndup.3

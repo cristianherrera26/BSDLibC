@@ -42,18 +42,11 @@ __RCSID("$NetBSD: strndup.c,v 1.4 2007/07/03 12:11:09 nakayama Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
-
 #include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef __weak_alias
-__weak_alias(strndup,_strndup)
-#endif
-
-#if !HAVE_STRNDUP
 char *
 strndup(const char *str, size_t n)
 {
@@ -71,4 +64,3 @@ strndup(const char *str, size_t n)
 	copy[len] = '\0';
 	return (copy);
 }
-#endif /* !HAVE_STRNDUP */

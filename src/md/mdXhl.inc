@@ -22,16 +22,6 @@
 #define	CONCAT(x,y)	__CONCAT(x,y)
 #define	MDNAME(x)	CONCAT(MDALGORITHM,x)
 
-#if !defined(_KERNEL) && defined(__weak_alias) && !defined(HAVE_NBTOOL_CONFIG_H)
-#define	WA(a,b)	__weak_alias(a,b)
-WA(MDNAME(End),CONCAT(_,MDNAME(End)))
-WA(MDNAME(File),CONCAT(_,MDNAME(File)))
-WA(MDNAME(Data),CONCAT(_,MDNAME(Data)))
-#undef WA
-#endif
-
-#include "namespace.h"
-
 #include <sys/types.h>
 
 #include MDINCLUDE

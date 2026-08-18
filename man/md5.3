@@ -1,4 +1,4 @@
-.\"	$NetBSD: mdX.3,v 1.12 2018/05/23 06:08:01 wiz Exp $
+.\"	$NetBSD: md5.3,v 1.12 2018/05/23 06:08:01 wiz Exp $
 .\"
 .\" ----------------------------------------------------------------------------
 .\" "THE BEER-WARE LICENSE" (Revision 42):
@@ -7,40 +7,40 @@
 .\" this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
 .\" ----------------------------------------------------------------------------
 .\"
-.\"	from FreeBSD Id: mdX.3,v 1.7 1996/10/22 16:28:56 phk Exp
+.\"	from FreeBSD Id: md5.3,v 1.7 1996/10/22 16:28:56 phk Exp
 .\"
 .Dd May 22, 2018
-.Dt MDX 3
+.Dt MD5 3
 .Os
 .Sh NAME
-.Nm MDXInit ,
-.Nm MDXUpdate ,
-.Nm MDXFinal ,
-.Nm MDXEnd ,
-.Nm MDXFile ,
-.Nm MDXData
+.Nm MD5Init ,
+.Nm MD5Update ,
+.Nm MD5Final ,
+.Nm MD5End ,
+.Nm MD5File ,
+.Nm MD5Data
 .Nd calculate the RSA Data Security, Inc.,
-.Dq MDX
+.Dq MD5
 message digest
 .Sh LIBRARY
 .Lb libc
 .Sh SYNOPSIS
 .In sys/types.h
-.In mdX.h
+.In md5.h
 .Ft void
-.Fn MDXInit "MDX_CTX *context"
+.Fn MD5Init "MD5_CTX *context"
 .Ft void
-.Fn MDXUpdate "MDX_CTX *context" "const unsigned char *data" "unsigned int len"
+.Fn MD5Update "MD5_CTX *context" "const unsigned char *data" "unsigned int len"
 .Ft void
-.Fn MDXFinal "unsigned char digest[16]" "MDX_CTX *context"
+.Fn MD5Final "unsigned char digest[16]" "MD5_CTX *context"
 .Ft "char *"
-.Fn MDXEnd "MDX_CTX *context" "char *buf"
+.Fn MD5End "MD5_CTX *context" "char *buf"
 .Ft "char *"
-.Fn MDXFile "const char *filename" "char *buf"
+.Fn MD5File "const char *filename" "char *buf"
 .Ft "char *"
-.Fn MDXData "const unsigned char *data" "unsigned int len" "char *buf"
+.Fn MD5Data "const unsigned char *data" "unsigned int len" "char *buf"
 .Sh DESCRIPTION
-The MDX functions calculate a 128-bit cryptographic checksum (digest)
+The MD5 functions calculate a 128-bit cryptographic checksum (digest)
 for any number of input bytes.
 A cryptographic checksum is a one-way
 hash-function, that is, you cannot find (except by exhaustive search)
@@ -56,41 +56,41 @@ response as ``MD4 with safety-belts''.
 When in doubt, use MD5.
 .Pp
 The
-.Fn MDXInit ,
-.Fn MDXUpdate ,
+.Fn MD5Init ,
+.Fn MD5Update ,
 and
-.Fn MDXFinal
+.Fn MD5Final
 functions are the core functions.
-Allocate an MDX_CTX, initialize it with
-.Fn MDXInit ,
+Allocate an MD5_CTX, initialize it with
+.Fn MD5Init ,
 run over the data with
-.Fn MDXUpdate ,
+.Fn MD5Update ,
 and finally extract the result using
-.Fn MDXFinal .
+.Fn MD5Final .
 .Pp
-.Fn MDXEnd
+.Fn MD5End
 is a wrapper for
-.Fn MDXFinal
+.Fn MD5Final
 which converts the return value to a 33-character
 (including the terminating '\e0')
 .Tn ASCII
 string which represents the 128 bits in hexadecimal.
 .Pp
-.Fn MDXFile
+.Fn MD5File
 calculates the digest of a file, and uses
-.Fn MDXEnd
+.Fn MD5End
 to return the result.
 If the file cannot be opened, a null pointer is returned.
-.Fn MDXData
+.Fn MD5Data
 calculates the digest of a chunk of data in memory, and uses
-.Fn MDXEnd
+.Fn MD5End
 to return the result.
 .Pp
 When using
-.Fn MDXEnd ,
-.Fn MDXFile ,
+.Fn MD5End ,
+.Fn MD5File ,
 or
-.Fn MDXData ,
+.Fn MD5Data ,
 the
 .Ar buf
 argument can be a null pointer, in which case the returned string
@@ -133,7 +133,7 @@ These functions appeared in
 .Nx 1.3 .
 .Sh AUTHORS
 .An -nosplit
-The original MDX routines were developed by
+The original MD5 routines were developed by
 .An RSA Data Security, Inc. ,
 and published in the above references.
 This code is derived directly from these implementations by

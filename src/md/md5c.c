@@ -38,7 +38,6 @@
 #if defined(LIBC_SCCS) && !defined(lint)
 __RCSID("$NetBSD: md5c.c,v 1.5 2012/03/20 16:21:41 matt Exp $");
 #endif /* LIBC_SCCS and not lint */
-#include "namespace.h"
 #include <sys/types.h>
 #include <assert.h>
 #include <string.h>
@@ -76,13 +75,6 @@ typedef uint32_t UINT4;
 #define S42 10
 #define S43 15
 #define S44 21
-
-#if !defined(_KERNEL) && !defined(_STANDALONE) && defined(__weak_alias)
-__weak_alias(MD5Init,_MD5Init)
-__weak_alias(MD5Update,_MD5Update)
-__weak_alias(MD5Final,_MD5Final)
-__weak_alias(MD5Transform,_MD5Transform)
-#endif
 
 static void MD5Transform(UINT4 [4], const unsigned char [64]);
 

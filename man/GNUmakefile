@@ -37,3 +37,15 @@ install-man3-symlinks: install-man3
 	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/mergesort.3
 	$(LINK) qsort.3 $(DESTDIR)$(MANDIR)/man3/mergesort_r.3
 	$(LINK) strdup.3 $(DESTDIR)$(MANDIR)/man3/strndup.3
+	$(LINK) md4.3 $(DESTDIR)$(MANDIR)/man3/MD4Init.3
+	$(LINK) md4.3 $(DESTDIR)$(MANDIR)/man3/MD4Update.3
+	$(LINK) md4.3 $(DESTDIR)$(MANDIR)/man3/MD4Final.3
+	$(LINK) md4.3 $(DESTDIR)$(MANDIR)/man3/MD4End.3
+	$(LINK) md4.3 $(DESTDIR)$(MANDIR)/man3/MD4File.3
+	$(LINK) md4.3 $(DESTDIR)$(MANDIR)/man3/MD4Data.3
+	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5Init.3
+	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5Update.3
+	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5Final.3
+	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5End.3
+	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5File.3
+	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5Data.3

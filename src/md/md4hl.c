@@ -13,4 +13,4 @@ __RCSID("$NetBSD: md4hl.c,v 1.7 2005/09/26 03:01:41 christos Exp $");
 #define	MDALGORITHM	MD4
 #define MDINCLUDE	<md4.h>
 
-#include "mdXhl.c"
+#include "mdXhl.inc"

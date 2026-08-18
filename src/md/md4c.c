@@ -34,8 +34,6 @@
 __RCSID("$NetBSD: md4c.c,v 1.5 2012/03/20 16:21:41 matt Exp $");
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
-
 #include <sys/types.h>
 
 #include <assert.h>
@@ -117,13 +115,6 @@ static const unsigned char PADDING[64] = {
 	(a) += H ((b), (c), (d)) + (x) + (UINT4)0x6ed9eba1; \
 	(a) = ROTATE_LEFT ((a), (s)); \
 }
-
-#if !defined(_KERNEL) && !defined(_STANDALONE) && defined(__weak_alias)
-__weak_alias(MD4Init,_MD4Init)
-__weak_alias(MD4Update,_MD4Update)
-__weak_alias(MD4Final,_MD4Final)
-__weak_alias(MD4Transform,_MD4Transform)
-#endif
 
 /*
  * MD4 initialization. Begins an MD4 operation, writing a new context.

@@ -30,11 +30,10 @@
 #include <sys/cdefs.h>
 #include <unistd.h>
 
-/* Wrapper of pledge for compatibility with OpenBSD software */
+__warn_references(pledge, 
+	"warning: the pledge() function is only a stub, and it doesn't have any functionality")
 int
-pledge(const char *promises, const char *execpromises)
+pledge(const char *promises __unused, const char *execpromises __unused)
 {
-	__USE(promises);
-	__USE(execpromises);
 	return 0;
 }

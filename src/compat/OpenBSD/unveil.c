@@ -30,11 +30,10 @@
 #include <sys/cdefs.h>
 #include <unistd.h>
 
-/* Wrapper of unveil for compatibility with OpenBSD software*/
+__warn_references(unveil,
+	"warning: the unveil() function is only a stub, and it doesn't have any functionality")
 int
-unveil(const char *path, const char *permissions)
+unveil(const char *path __unused, const char *permissions __unused)
 {
-	__USE(path);
-	__USE(permissions);
 	return 0;
 }

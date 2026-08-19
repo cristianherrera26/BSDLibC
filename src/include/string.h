@@ -55,4 +55,6 @@ char *strndup(const char *str, size_t n);
 
 void swab(const void *__restrict src, void *__restrict dst, ssize_t nbytes);
 
+char *strerror(int errnum);
+
 #endif

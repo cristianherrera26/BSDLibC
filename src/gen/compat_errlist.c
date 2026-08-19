@@ -38,16 +38,6 @@ __RCSID("$NetBSD: compat_errlist.c,v 1.3 2024/01/20 14:52:45 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
-
-#include <compat/include/errno.h>
-#ifdef __weak_alias
-__weak_alias(sys_errlist, _sys_errlist)
-__weak_alias(__sys_errlist, _sys_errlist)
-__weak_alias(sys_nerr, _sys_nerr)
-__weak_alias(__sys_nerr, _sys_nerr)
-#endif
-
 const char *const sys_errlist[] = {
 	"Undefined error: 0",			/*  0 - ENOERROR */
 	"Operation not permitted",		/*  1 - EPERM */

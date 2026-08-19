@@ -13,9 +13,6 @@ SRCS=generic/crt0.c
 OBJS=generic/crt0.o
 endif
 
-SRCS+=libc_start.c
-OBJS+=libc_start.o
-
 -include ../../config.mk
 
 CFLAGS+=-ffreestanding -nostdlib -nostdinc

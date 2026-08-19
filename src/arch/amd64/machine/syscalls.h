@@ -43,6 +43,7 @@
 #define SYS_fork               57
 #define SYS_exit               60
 #define SYS_uname              63
+#define SYS_getcwd             79
 #define SYS_chdir              80
 #define SYS_fchdir             81
 #define SYS_readlink           89

@@ -39,6 +39,11 @@ int pledge(const char *promises, const char *execpromises);
 int sethostid(long hostid);
 long gethostid(void);
 
+char *getcwd(char *buf, size_t size);
+char *getwd(char *buf);
+
+int revoke(const char *path);
+
 #define STDIN_FILENO  0
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2

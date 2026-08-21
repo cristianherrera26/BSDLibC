@@ -41,12 +41,7 @@ __RCSID("$NetBSD: lldiv.c,v 1.4 2012/06/25 22:32:45 abs Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
 #include <stdlib.h>		/* lldiv_t */
-
-#ifdef __weak_alias
-__weak_alias(lldiv, _lldiv)
-#endif
 
 /* LONGLONG */
 lldiv_t

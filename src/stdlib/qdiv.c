@@ -41,12 +41,7 @@ __RCSID("$NetBSD: qdiv.c,v 1.7 2012/06/25 22:32:45 abs Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
 #include <stdlib.h>		/* qdiv_t */
-
-#ifdef __weak_alias
-__weak_alias(qdiv,_qdiv)
-#endif
 
 qdiv_t
 qdiv(quad_t num, quad_t denom)

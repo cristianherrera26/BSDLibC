@@ -43,6 +43,7 @@ char *getcwd(char *buf, size_t size);
 char *getwd(char *buf);
 
 int revoke(const char *path);
+int execve(const char *path, char *const argv[], char *const envp[]);
 
 #define STDIN_FILENO  0
 #define STDOUT_FILENO 1

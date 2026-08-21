@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <unistd.h>
+#include <stdlib.h>
 #include <string.h>
 
 const char *__progname;
@@ -43,6 +43,5 @@ __libc_start_main(int (*main)(int argc, char *argv[], char *envp[]), int argc, c
 	else
 		__progname++;
 
-	int exit_code = main(argc, argv, envp);
-	_exit(exit_code);
+	exit(main(argc, argv, envp));
 }

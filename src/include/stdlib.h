@@ -37,4 +37,28 @@ int heapsort(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *
 int mergesort(void *a, size_t n, size_t es, int (*cmp)(const void *, const void *));
 int mergesort_r(void *base, size_t nmemb, size_t size, int (*cmp)(const void *, const void *, void *), void *cookie);
 
+typedef struct {
+        int quot;               /* quotient */
+        int rem;                /* remainder */
+} div_t;
+
+typedef struct {
+        long quot;              /* quotient */
+        long rem;               /* remainder */
+} ldiv_t;
+
+typedef struct {
+        /* LONGLONG */
+        long long int quot;     /* quotient */
+        /* LONGLONG */
+        long long int rem;      /* remainder */
+} lldiv_t;
+
+typedef struct {
+        quad_t quot;            /* quotient */
+        quad_t rem;             /* remainder */
+} qdiv_t;
+
+div_t div(int num, int denom);
+
 #endif

@@ -49,3 +49,5 @@ install-man3-symlinks: install-man3
 	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5End.3
 	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5File.3
 	$(LINK) md5.3 $(DESTDIR)$(MANDIR)/man3/MD5Data.3
+	$(LINK) div.3 $(DESTDIR)$(MANDIR)/man3/ldiv.3
+	$(LINK) div.3 $(DESTDIR)$(MANDIR)/man3/lldiv.3

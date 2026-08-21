@@ -11,6 +11,9 @@ int abs(int j);
 long labs(long j);
 long long int llabs(long long int j);
 void _Exit(int exit_code);
+void exit(int status);
+int at_quick_exit(void (*func)(void));
+void quick_exit(int status);
 const char *getprogname(void);
 void setprogname(const char *progname);
 

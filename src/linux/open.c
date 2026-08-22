@@ -6,7 +6,8 @@
 #include <fcntl.h>
 #include <stdarg.h>
 
-int open(const char *filename, int flags, ...)
+int
+open(const char *filename, int flags, ...)
 {
 	va_list args;
 	va_start(args, flags);

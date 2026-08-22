@@ -3,6 +3,10 @@
 #include <unistd.h>
 #include <stddef.h>
 
+extern int
+__sysctl(const int *name, unsigned int namelen, void *oldp,
+        size_t *oldlenp, const void *newp, size_t newlen);
+
 static int user_sysctl(const int *, unsigned int, void *,
 			size_t *, const void *, size_t);
 int

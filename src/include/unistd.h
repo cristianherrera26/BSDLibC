@@ -6,14 +6,17 @@
 
 pid_t fork(void);
 pid_t getpid(void);
+pid_t getppid(void);
 ssize_t write(int fd, const void *buf, size_t count);
 ssize_t read(int fd, void *buf, size_t count);
 void _exit(int exit_code);
-int
-__sysctl(const int *name, unsigned int namelen, void *oldp,
-        size_t *oldlenp, const void *newp, size_t newlen);
 int getdomainname(char *name, size_t namelen);
 int gethostname(char *name, size_t namelen);
+
+#define F_OK 0
+#define R_OK 4
+#define W_OK 2
+#define X_OK 1
 
 int close(int fd);
 void sync(void);
@@ -29,6 +32,10 @@ int chroot(const char *path);
 int chdir(const char *path);
 int fchdir(int fd);
 int fchroot(int fd);
+int access(const char *path, int mode);
+int link(const char *path);
+int unlink(const char *path);
+int pipe(int fd[2]);
 
 ssize_t readlink(const char *path, char *buf, size_t count);
 

@@ -40,8 +40,9 @@ __RCSID("$NetBSD: setprogname.c,v 1.3 2003/07/26 19:24:44 salo Exp $");
 #endif /* LIBC_SCCS and not lint */
 
 /* In NetBSD, the program name is set by crt0.  It can't be overridden. */
-/* In BSDLibC it's the same, the difference is that the program name is set by __libc_start_main */
 #undef	REALLY_SET_PROGNAME
+/* In BSDLibC, the program name can be modified */
+#define REALLY_SET_PROGNAME
 
 #include <stdlib.h>
 

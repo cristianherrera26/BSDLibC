@@ -30,8 +30,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-const char *__progname;
-const char *__full_progname;
+char *__progname;
+char *__full_progname;
+char **environ;
 
 void
 __libc_start_main(int (*main)(int argc, char *argv[], char *envp[]), int argc, char *argv[], char *envp[])
@@ -43,5 +44,6 @@ __libc_start_main(int (*main)(int argc, char *argv[], char *envp[]), int argc, c
 	else
 		__progname++;
 
+	environ = envp;
 	exit(main(argc, argv, envp));
 }

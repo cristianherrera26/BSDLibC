@@ -2,6 +2,7 @@
 #define _UNISTD_H	1
 
 #include <sys/types.h>
+#include <stdarg.h>
 #include <stddef.h>
 
 pid_t fork(void);
@@ -51,6 +52,7 @@ char *getwd(char *buf);
 
 int revoke(const char *path);
 int execve(const char *path, char *const argv[], char *const envp[]);
+int execl(const char *name, const char *arg, ...);
 
 #define STDIN_FILENO  0
 #define STDOUT_FILENO 1

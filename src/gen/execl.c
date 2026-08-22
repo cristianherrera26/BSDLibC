@@ -38,18 +38,12 @@ __RCSID("$NetBSD: execl.c,v 1.18 2024/01/20 14:52:47 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
 #include <errno.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "reentrant.h"
-#include "extern.h"
 
-#ifdef __weak_alias
-__weak_alias(execl,_execl)
-#endif
-
+extern char **environ;
 
 int
 execl(const char *name, const char *arg, ...)

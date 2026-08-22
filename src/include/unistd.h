@@ -53,6 +53,13 @@ char *getwd(char *buf);
 int revoke(const char *path);
 int execve(const char *path, char *const argv[], char *const envp[]);
 int execl(const char *name, const char *arg, ...);
+int execv(const char *name, char * const *argv);
+int exect(const char *path, char *const argv[], char *const envp[]);
+int execle(const char *name, const char *arg, ...);
+int execvpe(const char *name, char * const *argv, char * const * envp);
+int execvp(const char *name, char * const *argv);
+int execlpe(const char *name, const char *arg, ...);
+int execlp(const char *name, const char *arg, ...);
 
 #define STDIN_FILENO  0
 #define STDOUT_FILENO 1

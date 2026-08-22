@@ -38,7 +38,6 @@ __RCSID("$NetBSD: execvp.c,v 1.32 2024/01/20 14:52:47 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
@@ -47,13 +46,8 @@ __RCSID("$NetBSD: execvp.c,v 1.32 2024/01/20 14:52:47 christos Exp $");
 #include <limits.h>
 #include <unistd.h>
 #include <paths.h>
-#include "reentrant.h"
-#include "extern.h"
 
-#ifdef __weak_alias
-__weak_alias(execvp,_execvp)
-__weak_alias(execvpe,_execvpe)
-#endif
+extern char **environ;
 
 int
 execvpe(const char *name, char * const *argv, char * const * envp)
@@ -83,7 +77,9 @@ execvpe(const char *name, char * const *argv, char * const * envp)
 	bp = buf;
 
 	/* Get the path we're searching. */
+#if 0
 	if (!(path = getenv("PATH")))
+#endif
 		path = _PATH_DEFPATH;
 
 	do {
@@ -139,8 +135,10 @@ retry:		(void)execve(bp, argv, envp);
 			(void)execve(_PATH_BSHELL, __UNCONST(memp), envp);
 			goto done;
 		case ETXTBSY:
+#if 0
 			if (etxtbsy < 3)
 				(void)sleep(++etxtbsy);
+#endif
 			goto retry;
 		default:
 			goto done;

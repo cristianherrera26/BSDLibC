@@ -38,14 +38,9 @@ __RCSID("$NetBSD: execle.c,v 1.12 2011/06/30 19:46:07 joerg Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#ifdef __weak_alias
-__weak_alias(execle,_execle)
-#endif
 
 int
 execle(const char *name, const char *arg, ...)

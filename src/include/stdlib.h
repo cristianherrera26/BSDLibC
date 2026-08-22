@@ -60,8 +60,8 @@ typedef struct {
 } qdiv_t;
 
 div_t div(int num, int denom);
-ldiv_t div(long num, long denom);
-lldiv_t div(long long num, long long denom);
-qdiv_t div(quad_t num, quad_t denom);
+ldiv_t ldiv(long num, long denom);
+lldiv_t lldiv(long long num, long long denom);
+qdiv_t qdiv(quad_t num, quad_t denom);
 
 #endif
